@@ -1,12 +1,13 @@
-###
+/*
 
 Copyright (c) 2015 Drew Dahlman
 
-###
-data = {
+*/
+
+const data = {
 	audio: {
 		background: {
-			src: './audio/background.mp3'
+			src: './audio/background.mp3',
 			loop: true
 		}
 	}

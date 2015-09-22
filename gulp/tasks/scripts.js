@@ -5,7 +5,7 @@
  |___/\__|_| |_| .__/\__/__/
                |_|          
 
- Compile all CoffeeScript in the ./src/coffee directory, bundle it and save a
+ Compile all CoffeeScript in the ./src/js directory, bundle it and save a
  non-minified version for the local webserver to ./public/js.
 
  No sourcemaps here (yet).
@@ -19,8 +19,8 @@ var browserify = require('browserify'),
 
 gulp.task('scripts', function() {
   return browserify({
-      entries: ['./src/coffee/app.coffee'],
-      extensions: ['.coffee']
+      entries: ['./src/js/app.js'],
+      extensions: ['.js']
     })
     .bundle()
     .on('error', handleErrors)

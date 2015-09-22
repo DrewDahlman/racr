@@ -1,1 +1,0 @@
-window._RACR = window._RACR || {}
