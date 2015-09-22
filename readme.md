@@ -1,3 +1,5 @@
+![](public/images/splash.jpg)
+
 ## RACR
 A game made for the [Denver Dev's](http://denverdevs.com) Code Challenge.
 
