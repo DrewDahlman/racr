@@ -25,5 +25,5 @@ class Application {
 
 module.exports = Application;
 
-// Send it!
+// Build it!
 $(function() { _RACR.instance = new Application(); });
