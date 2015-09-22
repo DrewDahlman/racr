@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2015 Fruit of the Loom. All Rights Reserved.
+Copyright (c) 2015 Drew Dahlman
 
 */
 
