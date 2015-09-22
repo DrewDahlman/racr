@@ -18,7 +18,20 @@ class Application {
   | Construct.
   ------------------------------------------ */
   constructor() {
+
+  	/* Assign all the things */
   	this.data = Data;
+
+  }
+
+  /*
+  ------------------------------------------
+  | load:void (-)
+  |
+  | Load in what we need.
+  ------------------------------------------ */
+  load() {
+  	
   }
 
 }
