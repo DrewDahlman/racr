@@ -13,11 +13,24 @@ class BaseView {
   | Construct.
   ------------------------------------------ */
 	constructor( options ) {
-		this.canvas 	= options.canvas
-		this.ctx 			= this.canvas.getContext('2d')
-		this.$el 			= options.$el
+		this.canvas 	= options.canvas;
+		this.ctx 			= options.ctx;
+		this.$el 			= options.$el;
+    this.model    = options.model;
 	}
 
+  /*
+  ------------------------------------------
+  | update:void (-)
+  |
+  | Update some things!.
+  ------------------------------------------ */
+  update() {
+
+    // Call render
+    this.render();
+  }
+  
   /*
   ------------------------------------------
   | render:void (-)

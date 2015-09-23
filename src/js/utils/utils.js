@@ -47,6 +47,21 @@ class Utils {
 
     return t[Modernizr.prefixed('transition')];
   }
+
+  /*
+  ------------------------------------------
+  | stats:void (-)
+  |
+  | Show stats meter.
+  ------------------------------------------ */
+  stats( context ) {
+    context.stats = new Stats();
+    context.stats.setMode(0);
+    context.stats.domElement.style.position = 'absolute';
+    context.stats.domElement.style.right = '0px';
+    context.stats.domElement.style.top = '0px';
+    document.body.appendChild( context.stats.domElement );
+  }
 }
 
 module.exports = Utils;
