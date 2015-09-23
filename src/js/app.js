@@ -5,11 +5,21 @@ Copyright (c) 2015 Drew Dahlman
 */
 
 // Util, etc
-let Env = require('./env'),
-    Utils = require('./utils/utils'),
-    Data = require('./data/data');
+const Env 					= require('./env'),
+			Eventful 			= require('./utils/eventful'),
+    	Utils 				= require('./utils/utils'),
+    	Data 					= require('./data/data');
 
-class Application {
+// Components
+const SoundManager 	= require('./components/SoundManager');
+
+// Models
+const AppModel			= require('./models/AppModel');
+
+// Views
+const GameView 			= require('./views/GameView');
+
+class Application extends Eventful {
 
   /*
   ------------------------------------------
@@ -17,21 +27,37 @@ class Application {
   |
   | Construct.
   ------------------------------------------ */
-  constructor() {
+  constructor() {  	
+  	super();
 
-  	/* Assign all the things */
-  	this.data = Data;
+  	// Build out model
+  	this.model = new AppModel( Data );
 
+  	// Let's build the app
+  	this.build();
   }
 
   /*
   ------------------------------------------
-  | load:void (-)
+  | build:void (-)
   |
-  | Load in what we need.
+  | Build a game!
   ------------------------------------------ */
-  load() {
-  	
+  build() {
+  	// Listen for some inital model events
+  	this.model.on('assets_loaded', () => this.intro() );
+  	this.model.on('asset_loaded', (data) => console.log(data.message));
+  	this.model.preload();
+  }
+
+  /*
+  ------------------------------------------
+  | intro:void (-)
+  |
+  | Let us bein...
+  ------------------------------------------ */
+  intro() {
+
   }
 
 }

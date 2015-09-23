@@ -25,7 +25,7 @@ class Eventful {
   | Validate event type.
   ------------------------------------------ */
   validateEventType(type) {
-    if((/^[a-z\-\_]+$/g).test(type) === false) {
+    if((/^[a-z\-\:\_]+$/g).test(type) === false) {
       throw 'Error: type type must be a string (a-z, -, _)!';
     }
   }
