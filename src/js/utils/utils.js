@@ -52,6 +52,8 @@ class Utils {
   ------------------------------------------
   | stats:void (-)
   |
+  | context:a scope context that stats belongs to
+  |
   | Show stats meter.
   ------------------------------------------ */
   stats( context ) {
