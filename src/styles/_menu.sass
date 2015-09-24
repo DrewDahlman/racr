@@ -40,7 +40,6 @@
 		overflow: hidden
 		opacity: 0
 		transition: top $speed $easeinout, opacity $speed, height $speed_metal $easeinout
-		transition-delay: $speed_metal, $speed_metal, $speed_metal
 		transform: translate(-50%, -50%)
 
 		#title,
@@ -52,7 +51,7 @@
 			background: url(../images/ui/scanline-horizontal.png)
 			-webkit-background-clip: text
 			-webkit-text-fill-color: transparent
-			text-shadow: 0px 0px 15px $light_blue
+			transition: all $speed
 
 		#bar
 			position: relative
@@ -80,8 +79,14 @@
 					size: 15px
 				cursor: pointer
 				margin: auto
-				background:
-					color: rgba(255, 255, 255, .1)
+				background: url(../images/ui/scanline-horizontal-dark.png)
+				-webkit-background-clip: text
+				-webkit-text-fill-color: transparent
+
+				&:hover
+					background: url(../images/ui/scanline-horizontal.png)
+					-webkit-background-clip: text
+					-webkit-text-fill-color: transparent
 
 #main-menu.show
 	#menu-bg
@@ -90,3 +95,4 @@
 		top: 50%
 		opacity: 1
 		height: 165px
+		transition-delay: $speed_metal, $speed_metal, $speed_metal

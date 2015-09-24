@@ -48,7 +48,7 @@ class GhostRing extends BaseCharacter {
 	    start: Math.PI / 2,
 	    end: 2 * Math.PI,
 	    counter: false,
-	    stroke: 5,
+	    stroke: 3,
 	    opacity: 1,
 	    strokeColor: function() {
 	    	return 'rgba(129, 251, 252, '+this.opacity+')'

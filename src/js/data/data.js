@@ -25,6 +25,12 @@ const data = {
 			},
 			blast_3: {
 				src: './audio/blast_3.mp3'
+			},
+			click: {
+				src: './audio/click.mp3'
+			},
+			glow: {
+				src: './audio/glow.mp3'
 			}
 		}],
 		graphics: [{

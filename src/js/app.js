@@ -34,6 +34,7 @@ class Application extends Eventful {
 
     // DEBUG
     this.debug = false;
+    window.mute = true;
 
   	// Build out model
   	this.model = new AppModel( Data );
@@ -113,6 +114,8 @@ class Application extends Eventful {
   ------------------------------------------ */
   start_game() {
 
+    let self = this;
+
     // Remove the listener ( keep shit clean yo! )
     this.view.off('load_complete');
 
@@ -132,9 +135,35 @@ class Application extends Eventful {
     this.background_sound.player.volume = .15;
     this.background_sound.play();
 
+    // Listen to the view
+    this.view.on('ready_play', () => $(this.background_sound.player).animate({volume: 0}) )
+    this.view.on('play', function(){
+      self.background_sound.player.currentTime = 0;
+      self.background_sound.fade_in(.15);
+      self.view.off('ready_play').off('play');
+      self.play();
+    })
+
     // Kick off the view
     this.view.init();
 
+  }
+
+  /*
+  ------------------------------------------
+  | play:void (-)
+  |
+  | Game time baby!
+  ------------------------------------------ */
+  play() {
+    this.view = new GameView({
+      canvas: this.canvas, 
+      ctx: this.ctx, 
+      $el: this.$el, 
+      model: this.model 
+    });
+
+    this.view.init();
   }
 
   /*

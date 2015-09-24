@@ -21,7 +21,7 @@ class GameView extends BaseView {
 	}
 
   init() {
-    console.log(this.model.assets.sounds)    
+    console.log("LETS PLAYYYY")    
   }
 
   /*
