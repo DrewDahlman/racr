@@ -33,8 +33,6 @@ class MenuView extends BaseView {
     this.$el.append(this.$template);
     setTimeout( () => this.$template.addClass('show') ,0);
 
-    console.log(this.model)
-
     $(window).keypress( function(e) {
       let s = null;
 

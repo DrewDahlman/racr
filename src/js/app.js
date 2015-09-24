@@ -33,7 +33,7 @@ class Application extends Eventful {
   	super();
 
     // DEBUG
-    this.debug = true;
+    this.debug = false;
 
   	// Build out model
   	this.model = new AppModel( Data );
@@ -68,6 +68,15 @@ class Application extends Eventful {
 
     // Load it up and let'r rip!
     this.init();
+
+    // this.view = new MenuView({
+    //   canvas: this.canvas, 
+    //   ctx: this.ctx, 
+    //   $el: this.$el, 
+    //   model: this.model 
+    // });
+
+    // this.view.init();
   }
 
   /*

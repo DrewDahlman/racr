@@ -13,5 +13,5 @@ var gulp = require('gulp');
 gulp.task('watch', function(){
   gulp.watch('src/**/*.js', ['scripts']);
   gulp.watch('src/styles/**', ['styles']);
-  gulp.watch('src/templates/**', ['templates']);
+  gulp.watch('src/js/templates/**', ['templates']);
 });

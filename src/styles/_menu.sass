@@ -1,0 +1,92 @@
+#main-menu
+	position: absolute
+	top: 0px
+	left: 0px
+	height: 100%
+	width: 100%
+	overflow: hidden
+
+	#menu-bg
+		position: absolute
+		top: 0px
+		left: 0px
+		height: 100%
+		width: 100%
+		background:
+			image: url(../images/splash.jpg)
+			size: cover
+			position: center
+		opacity: 0
+		z-index: 0
+		transition: all $speed
+
+	#menu-content
+		position: absolute
+		width: 100%
+		height: 55px
+		max-width: 300px
+		top: 120%
+		left: 50%
+		text:
+			align: center
+		padding:
+			top: 45px
+			bottom: 25px
+			left: 25px
+			right: 25px
+		background:
+			color: rgba(0,0,0,.7)
+		z-index: 1
+		overflow: hidden
+		opacity: 0
+		transition: top $speed $easeinout, opacity $speed, height $speed_metal $easeinout
+		transition-delay: $speed_metal, $speed_metal, $speed_metal
+		transform: translate(-50%, -50%)
+
+		#title,
+		.button
+			color: $blue
+			font:
+				size: 18px
+			letter-spacing: 18px
+			background: url(../images/ui/scanline-horizontal.png)
+			-webkit-background-clip: text
+			-webkit-text-fill-color: transparent
+			text-shadow: 0px 0px 15px $light_blue
+
+		#bar
+			position: relative
+			width: 90%
+			height: 2px
+			border-radius: 5px
+			margin:
+				top: 25px
+				bottom: 25px
+				left: auto
+				right: auto
+			background:
+				color: $blue
+				image: url(../images/ui/scanline-horizontal.png)
+			box-shadow: 0px 0px 15px 0px $light_blue
+
+		#options
+			.button
+				letter-spacing: 5px
+				padding:
+					top: 15px
+					bottom: 15px
+				width: 90%
+				font:
+					size: 15px
+				cursor: pointer
+				margin: auto
+				background:
+					color: rgba(255, 255, 255, .1)
+
+#main-menu.show
+	#menu-bg
+		opacity: 1
+	#menu-content
+		top: 50%
+		opacity: 1
+		height: 165px
