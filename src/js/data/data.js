@@ -28,6 +28,9 @@ const data = {
 			}
 		}],
 		graphics: [{
+			splash: {
+				src: './images/splash.jpg'
+			},
 			vehicles: {
 				src: './images/vehicle_assets.png'
 			},

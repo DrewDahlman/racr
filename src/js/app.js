@@ -13,9 +13,13 @@ const Env 					= require('./env'),
 // Models
 const AppModel			= require('./models/AppModel');
 
+// Components
+const SoundManager  = require('./components/SoundManager');
+
 // Views
-const GameView 			= require('./views/GameView'),
-      LoaderView    = require('./views/LoaderView');
+const LoaderView    = require('./views/LoaderView'),
+      MenuView      = require('./views/MenuView'),
+      GameView 			= require('./views/GameView');
 
 class Application extends Eventful {
 
@@ -103,12 +107,21 @@ class Application extends Eventful {
     // Remove the listener ( keep shit clean yo! )
     this.view.off('load_complete');
 
-    this.view = new GameView({
+    this.view = new MenuView({
       canvas: this.canvas, 
       ctx: this.ctx, 
       $el: this.$el, 
       model: this.model 
     });
+
+    // Start some sweet tunes!
+    this.background_sound = new SoundManager({
+      sound: this.model.assets.sounds.background, 
+      loop: true
+    });
+
+    this.background_sound.player.volume = .15;
+    this.background_sound.play();
 
     // Kick off the view
     this.view.init();

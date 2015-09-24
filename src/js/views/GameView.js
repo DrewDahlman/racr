@@ -21,9 +21,7 @@ class GameView extends BaseView {
 	}
 
   init() {
-    console.log(this.model.assets.sounds)
-    let bg = new SoundManager({sound: this.model.assets.sounds.background, loop: true}).play();
-    
+    console.log(this.model.assets.sounds)    
   }
 
   /*

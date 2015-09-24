@@ -18,7 +18,8 @@ class SoundManager {
 		this.player = new Audio(data.sound.src);
 
 		// Loops on Loops
-		this.loop = data.loop || false;
+		// this.loop = data.loop || false;
+		this.player.loop = data.loop || false;
 
 		// Duration
 		this.duration = data.sound.duration;
