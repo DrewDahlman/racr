@@ -12,3 +12,16 @@ To build and run locally.
 - rock and roll, let'r rip!
 
 ## Notes
+Some general notes on how things work.
+
+#Data
+Data is where character data is held as well as all game assets.
+
+#GameView
+GameView is a special view that deals with more details such as collision detection and such.
+
+#Views
+Each view is responsible for "characters" it brings characters into existance and calls their update.
+
+#Characters
+Each character is responsible for its own state and what it is doing, it can be acted upon by its parent view.

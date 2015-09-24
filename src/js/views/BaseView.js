@@ -3,8 +3,9 @@
 Copyright (c) 2015 Drew Dahlman
 
 */
+const Eventful = require('../utils/eventful');
 
-class BaseView {
+class BaseView extends Eventful {
 
   /*
   ------------------------------------------
@@ -13,10 +14,13 @@ class BaseView {
   | Construct.
   ------------------------------------------ */
 	constructor( options ) {
-		this.canvas 	= options.canvas;
-		this.ctx 			= options.ctx;
-		this.$el 			= options.$el;
-    this.model    = options.model;
+    super();
+
+		this.canvas 	    = options.canvas;
+		this.ctx 			    = options.ctx;
+		this.$el 			    = options.$el;
+    this.model        = options.model;
+    this.characters   = [];
 	}
 
   /*
@@ -27,8 +31,6 @@ class BaseView {
   ------------------------------------------ */
   update() {
 
-    // Call render
-    this.render();
   }
   
   /*

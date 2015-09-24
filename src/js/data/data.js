@@ -12,7 +12,7 @@ const data = {
 	manifest: {
 		audio: [{
 			background: {
-				src: './audio/background.mp3'
+				src: './audio/background_b.mp3'
 			},
 			death: {
 				src: './audio/death.mp3'
@@ -30,6 +30,12 @@ const data = {
 		graphics: [{
 			vehicles: {
 				src: './images/vehicle_assets.png'
+			},
+			test1: {
+				src: './images/test/test1.jpg'
+			},
+			test2: {
+				src: './images/test/test2.jpg'
 			}
 		}]
 	}

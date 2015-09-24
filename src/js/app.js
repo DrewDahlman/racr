@@ -10,9 +10,6 @@ const Env 					= require('./env'),
     	Utils 				= require('./utils/utils'),
     	Data 					= require('./data/data');
 
-// Components
-const SoundManager 	= require('./components/SoundManager');
-
 // Models
 const AppModel			= require('./models/AppModel');
 
@@ -66,16 +63,16 @@ class Application extends Eventful {
     }
 
     // Load it up and let'r rip!
-    this.load();
+    this.init();
   }
 
   /*
   ------------------------------------------
-  | build:void (-)
+  | init:void (-)
   |
-  | Build a game!
+  | Build a game! Start the engine
   ------------------------------------------ */
-  load() {
+  init() {
 
     // Set our view
     this.view = new LoaderView({
@@ -85,8 +82,37 @@ class Application extends Eventful {
       model: this.model 
     });
 
-    // Kickoff our render frame
+    // Kick off the view
+    this.view.init();
+
+    // Listen for the load to complete
+    this.view.on('load_complete', () => this.start_game() );
+
+    // Start the engine
     this.render();
+  }
+
+  /*
+  ------------------------------------------
+  | start_game:void (-)
+  |
+  | Start the game!
+  ------------------------------------------ */
+  start_game() {
+
+    // Remove the listener ( keep shit clean yo! )
+    this.view.off('load_complete');
+
+    this.view = new GameView({
+      canvas: this.canvas, 
+      ctx: this.ctx, 
+      $el: this.$el, 
+      model: this.model 
+    });
+
+    // Kick off the view
+    this.view.init();
+
   }
 
   /*
@@ -101,6 +127,9 @@ class Application extends Eventful {
     if(this.debug){
       this.stats.begin();
     }
+
+    // Clear the canvas
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Update the current view
     if(this.view){  

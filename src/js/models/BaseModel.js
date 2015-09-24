@@ -18,9 +18,6 @@ class BaseModel extends Eventful {
 	constructor( data ) {
 
 		super();
-
-		// Defaults
-		this.data = data || {};
 	}
 
 }

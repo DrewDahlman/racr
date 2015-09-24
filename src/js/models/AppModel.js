@@ -5,18 +5,26 @@ Copyright (c) 2015 Drew Dahlman
 */
 
 const BaseModel 	= require('./BaseModel'),
-			Preloader 	= require('../utils/preloader');
+			Preloader 	= require('../components/Preloader');
 
 class AppModel extends BaseModel {
 
 	constructor(data) {
 		super(data);
 
-		this.manifest 		= data.manifest;
-		this.sounds 			= [];
-		this.graphics 		= [];
-		this.characters 	= [];
-		this.preloader 		= new Preloader( this );
+		// Manifest
+		this.manifest = data.manifest;
+
+		// Setup data
+		this.assets = {
+			sounds: [],
+			graphics: [],
+			characters: []	
+		}
+
+		// Preloader
+		// Use this to load things in
+		this.preloader = new Preloader( this );
 
 		// Listeners
 		this.preloader.on('asset_loaded', ( data ) => this.asset_loaded(data) );
@@ -32,15 +40,15 @@ class AppModel extends BaseModel {
 	| entire manifest is accounted for.
 	|
 	| Kind of wild but read it over, and checkout
-	| ../utils/preloader.js
+	| ../utils/preloader.js ( :35 )
 	------------------------------------------ */
 	preload() {
 
 		// Get our type based on the key in the manifest
-		let _type = Object.keys(this.manifest)[this.preloader.loaded];
+		let _type = Object.keys(this.manifest)[this.preloader.package_loaded];
 
 		// Check to see if our total loaded is < our manifest
-		if(this.preloader.loaded < Object.keys(this.manifest).length){
+		if(this.preloader.package_loaded < Object.keys(this.manifest).length){
 			this.preloader.load(_type, this.manifest[_type]);
 		} else {
 			this.trigger('assets_loaded');
@@ -54,7 +62,7 @@ class AppModel extends BaseModel {
 	| Fire asset loaded event.
 	------------------------------------------ */
 	asset_loaded(data) {
-		this.trigger('asset_loaded', { message: data.message });
+		this.trigger('asset_loaded', { total: data.total, loaded: data.loaded });
 	}
 
 	/*
@@ -66,7 +74,7 @@ class AppModel extends BaseModel {
 	| if there are more files to be loaded.
 	------------------------------------------ */
 	package_loaded(data) {
-		this.trigger('asset_loaded', { message: data.message });
+		this.trigger('asset_loaded', { message: data.message, total: data.total, loaded: data.loaded });
 		this.preload();
 	}
 }

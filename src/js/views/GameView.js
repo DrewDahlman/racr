@@ -3,8 +3,12 @@
 Copyright (c) 2015 Drew Dahlman
 
 */
+const BaseView = require('./BaseView');
 
-class GameView {
+// Components
+const SoundManager  = require('../components/SoundManager');
+
+class GameView extends BaseView {
 
   /*
   ------------------------------------------
@@ -13,8 +17,14 @@ class GameView {
   | Construct.
   ------------------------------------------ */
 	constructor( options ) {
-    // super(options);
+    super( options );
 	}
+
+  init() {
+    console.log(this.model.assets.sounds)
+    let bg = new SoundManager({sound: this.model.assets.sounds.background, loop: true}).play();
+    
+  }
 
   /*
   ------------------------------------------
