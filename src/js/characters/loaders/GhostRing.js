@@ -104,7 +104,7 @@ class GhostRing extends BaseCharacter {
 
 		// Logic around WTF is happening
 		if( this.ghost.percent < this.ghost.fully_loaded ){
-			this.ghost.percent += 2;
+			this.ghost.percent += 1.5;
 		} else if ( this.ghost.percent >= this.ghost.fully_loaded && !this.ghost.loaded ) {
 			this.ghost.loaded = true;
 			this.ghost.complete();
@@ -140,7 +140,7 @@ class GhostRing extends BaseCharacter {
 			// Smoothly load things in
 			if( this.ring.percent < this.ring.percent_loaded ) {
 				this.ring.percent += .5;
-			} else if ( this.ring.percent >= this.ring.fully_loaded ){
+			} else if ( this.ring.percent >= this.ring.fully_loaded && !this.ring.loaded ){
 				this.ring.loaded = true;
 			}
 
