@@ -45,8 +45,24 @@ const data = {
 			},
 			test2: {
 				src: './images/test/test2.jpg'
+			},
+			scanline_1_3: {
+				src: './images/ui/scanline-1x3-trans.png'
 			}
 		}]
+	},
+	characters: {
+		player: {
+			name: "",
+			height: 187,
+			width: 77,
+			x: 0,
+			y: 0,
+			positions: [
+				[8,378], // Off
+				[84, 378] // On
+			]
+		}
 	}
 }
 

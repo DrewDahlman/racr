@@ -9,7 +9,9 @@ const BaseView = require('./BaseView');
 const SoundManager  = require('../components/SoundManager');
 
 // Characters
-const Player = require('../characters/Player');
+const Player = require('../characters/Player'),
+      Clu = require('../characters/Clu'),
+      Gem = require('../characters/Gem');
 
 class GameView extends BaseView {
 
@@ -29,6 +31,8 @@ class GameView extends BaseView {
 
     this.characters = [];
     this.player = new Player( options );
+    this.clu = new Clu( options );
+    this.gem = new Gem( options );
 
     this.background = {
       x: -111,
@@ -59,6 +63,8 @@ class GameView extends BaseView {
 
   init() {
     this.characters.push(this.player);
+    this.characters.push(this.clu);
+    this.characters.push(this.gem);
   }
 
   /*
@@ -68,24 +74,24 @@ class GameView extends BaseView {
   | Update.
   ------------------------------------------ */
 	update() {
-    // let self = this;
+    let self = this;
 
-    // _.each(this.characters, function(i){
-    //   i.update();
-    // });
+    _.each(this.characters, function(i){
+      i.update();
+    });
 
     // this.$el.css({
     //   'background-position': self.background.x+"px" + " " + self.background.y+"px"
     // });
 
-    // this.background.y += 8;
+    // this.background.y += 15;
 
     // if(this.right){
-    //   this.background.x -= 8;
+    //   this.background.x -= 15;
     // }
 
     // if(this.left){
-    //   this.background.x += 8;
+    //   this.background.x += 15;
     // }
 
 	}

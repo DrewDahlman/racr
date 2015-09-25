@@ -6,7 +6,7 @@ Copyright (c) 2015 Drew Dahlman
 const BaseCharacter = require('./BaseCharacter'),
 			Sprite 				= require('./utils/Sprite');
 
-class Player extends BaseCharacter {
+class Clu extends BaseCharacter {
 
 	/*
 	------------------------------------------
@@ -21,8 +21,8 @@ class Player extends BaseCharacter {
 		this.data = {
 			height: 187,
 			width: 78,
-			x: ( self.canvas.width / 2 ) - ( 77 / 2 ),
-			y: ( self.canvas.height / 2 ) - ( 187 / 2 )
+			x: (( self.canvas.width / 2 ) - ( 77 / 2 ) - 150),
+			y: ( self.canvas.height / 2 ) - ( 187 / 2 ) + 80
 		}
 
 		this.sprite = new Sprite({
@@ -31,10 +31,10 @@ class Player extends BaseCharacter {
 			width: this.data.width, 
 			height: this.data.height,
 			positions: [
-				[7,378], // off
-				[81.2,378] // on
+				[7,-10], // off
+				[80,-10] // on
 			],
-			color: [ 129, 251, 252 ], // RGB
+			color: [ 218, 67, 47 ], // RGB
 			glow: 15
 		})
 
@@ -50,4 +50,4 @@ class Player extends BaseCharacter {
 	}
 }
 
-module.exports = Player;
+module.exports = Clu;

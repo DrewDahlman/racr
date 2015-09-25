@@ -51,9 +51,9 @@ Loader.prototype = {
 		this.ctx.shadowOffsetX 	= 0;
 		this.ctx.shadowOffsetY 	= 0;
 		this.ctx.shadowBlur 		= this.glow;
+		this.ctx.shadowColor 		= this.stroke_color();
 
 		// Stoke
-		this.ctx.shadowColor 		= this.stroke_color();
 		this.ctx.strokeStyle 		= this.stroke_color();
 		this.ctx.lineWidth 			= this.stroke;
 		this.ctx.lineCap 				= "round";
