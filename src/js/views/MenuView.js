@@ -47,36 +47,6 @@ class MenuView extends BaseView {
     $("#how-to").on('click', function(){
       console.log("how to")
     });
-
-    $(window).keypress( function(e) {
-      let s = null;
-
-      console.log(e.which)
-      
-      switch(e.which){
-        case 32:
-            s = new SoundManager({
-              sound: self.model.assets.sounds.blast_1
-            }).play();
-          break;
-        case 118:
-            s = new SoundManager({
-              sound: self.model.assets.sounds.blast_2
-            }).play();
-          break;
-        case 99:
-            s = new SoundManager({
-              sound: self.model.assets.sounds.blast_3
-            }).play();
-          break;
-        case 120:
-            s = new SoundManager({
-              sound: self.model.assets.sounds.death
-            }).play();
-          break;
-      }
-
-    });
   }
 
   /*

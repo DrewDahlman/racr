@@ -68,25 +68,25 @@ class GameView extends BaseView {
   | Update.
   ------------------------------------------ */
 	update() {
-    let self = this;
+    // let self = this;
 
-    _.each(this.characters, function(i){
-      i.update();
-    });
+    // _.each(this.characters, function(i){
+    //   i.update();
+    // });
 
-    this.$el.css({
-      'background-position': self.background.x+"px" + " " + self.background.y+"px"
-    });
+    // this.$el.css({
+    //   'background-position': self.background.x+"px" + " " + self.background.y+"px"
+    // });
 
-    this.background.y += 8;
+    // this.background.y += 8;
 
-    if(this.right){
-      this.background.x -= 8;
-    }
+    // if(this.right){
+    //   this.background.x -= 8;
+    // }
 
-    if(this.left){
-      this.background.x += 8;
-    }
+    // if(this.left){
+    //   this.background.x += 8;
+    // }
 
 	}
 }

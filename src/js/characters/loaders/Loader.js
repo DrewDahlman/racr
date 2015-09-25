@@ -80,8 +80,6 @@ Loader.prototype = {
 			if( this.opacity > 0 ){
 				this.glow += 2;
 				this.opacity -= .1;
-			} else {
-
 			}
 		}
 		this.draw();
