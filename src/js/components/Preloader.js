@@ -79,7 +79,7 @@ class Preloader extends Eventful {
 
 				// Push that data into the model
 				self.model.assets.sounds[key] = {src: item.src, duration: (a.duration * 1000)};
-
+				
 				// Iterate on how much has loaded
 				loaded += 1;
 				self.loaded++;
@@ -130,7 +130,7 @@ class Preloader extends Eventful {
 			img.onload = function(){
 
 				// Push data into model
-				self.model.assets.graphics[key] = item.src;
+				self.model.assets.graphics[key] = {src: item.src, img: img};
 
 				// Iterate loaded
 				loaded += 1;

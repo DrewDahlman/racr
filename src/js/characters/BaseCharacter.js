@@ -3,7 +3,8 @@
 Copyright (c) 2015 Drew Dahlman
 
 */
-const Eventful = require('../utils/eventful');
+const Eventful 			= require('../utils/eventful'),
+			SoundManager 	= require('../components/SoundManager');
 
 class BaseCharacter extends Eventful {
 
@@ -17,10 +18,19 @@ class BaseCharacter extends Eventful {
 		super();
 		
 		// Default Props
+		this.data = options;
 		this.canvas = options.canvas;
 		this.ctx = options.ctx;
+		this.model = options.model;
 
 	}
+
+	/*
+	------------------------------------------
+	| setup:void (-)
+	|
+	| Setup!
+	------------------------------------------ */
 
 	/*
 	------------------------------------------

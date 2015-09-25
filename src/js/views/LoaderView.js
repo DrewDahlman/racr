@@ -21,7 +21,7 @@ class LoaderView extends BaseView {
     super( options );
 
     // Characters
-    this.ghost = new GhostRing( options );
+    this.ghost_ring = new GhostRing( options );
 	}
 
   /*
@@ -33,11 +33,10 @@ class LoaderView extends BaseView {
   init() {
     
     // Listeners
-    this.model.on('asset_loaded', (data) => this.ghost.loaded(data) );
-    this.ghost.on('ghost_complete', () => this.start_loading() );
-    this.ghost.on('ring_complete', () => this.complete() );
-
-    this.ghost.update();
+    this.model.on('asset_loaded', (data) => this.ghost_ring.loaded(data) );
+    this.ghost_ring.on('ghost_complete', () => this.start_loading() );
+    this.ghost_ring.on('ring_complete', () => this.complete() );
+    
   }
   /*
   ------------------------------------------
@@ -57,7 +56,7 @@ class LoaderView extends BaseView {
   | Update those things dawg!
   ------------------------------------------ */
   update() {
-    this.ghost.update();
+    this.ghost_ring.update();
   }
 
 
@@ -68,7 +67,6 @@ class LoaderView extends BaseView {
   | Loading is complete start the exit.
   ------------------------------------------ */
   complete() {
-    // console.log('playout')
     this.trigger('load_complete');
   }
 

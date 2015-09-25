@@ -33,8 +33,8 @@ class Application extends Eventful {
   	super();
 
     // DEBUG
-    this.debug = false;
-    window.mute = true;
+    this.debug = true;
+    window.mute = false;
 
   	// Build out model
   	this.model = new AppModel( Data );

@@ -3,7 +3,8 @@
 Copyright (c) 2015 Drew Dahlman
 
 */
-const BaseCharacter = require('../BaseCharacter');
+const BaseCharacter = require('../BaseCharacter'),
+			Loader 				= require('./Loader');
 
 class GhostRing extends BaseCharacter {
 
@@ -15,59 +16,46 @@ class GhostRing extends BaseCharacter {
 	------------------------------------------ */
 	constructor( options ) {
 		super( options );
-		const self = this;
+		let self = this;
+		
+		// Set our state
+		this.state = 'pre_loading';
 
-		// Ghost
-		this.ghost = {
-	    centerX: this.canvas.width / 2,
-	    centerY: this.canvas.height / 2,
-	    radius: 150,
-	    start: Math.PI / 2,
-	    end: 2 * Math.PI,
-	    counter: false,
-	    stroke: .5,
-	    opacity: .1,
-	    strokeColor: function() {
-	    	return 'rgba(129, 251, 252, '+this.opacity+')'
-	    },
-	    percent: 0,
-	    fully_loaded: 100,
-	    loaded: false,
-	    progress: function(){
-	    	return this.percent / 100;
-	    },
-	    complete: function(){
-	    	self.trigger('ghost_complete');
-	    }
-	  }
+		// Our ghost & ring
+		this.ghost = new Loader( {
+			canvas: this.canvas, 
+			radius: 150, 
+			start: Math.PI / 2, 
+			end: 2 * Math.PI, 
+			stroke: .5, 
+			opacity: .1, 
+			glow: 15, 
+			color: [ 129, 251, 252 ], 
+			percent: 0, 
+			percent_loaded: 100,
+			load_speed: 2,
+			complete: function() {
+				self.trigger("ghost_complete");
+			}
+		});
 
-		this.ring = {
-	    centerX: this.canvas.width / 2,
-	    centerY: this.canvas.height / 2,
-	    radius: 150,
-	    start: Math.PI / 2,
-	    end: 2 * Math.PI,
-	    counter: false,
-	    stroke: 3,
-	    opacity: 1,
-	    strokeColor: function() {
-	    	return 'rgba(129, 251, 252, '+this.opacity+')'
-	    },
-	    percent: 0,
-	    percent_loaded: 10,
-	    fully_loaded: 100,
-	    loaded: false,
-	    glow: 15,
-	    final_glow: 55,
-	    current_glow: 15,
-	    progress: function(){
-	    	return this.percent / 100;
-	    },
-	    complete: function(){
-	    	self.trigger('ring_complete');
-	    }
-	  }
-
+		this.ring = new Loader( {
+			canvas: this.canvas, 
+			radius: 150, 
+			start: Math.PI / 2, 
+			end: 2 * Math.PI, 
+			stroke: 3, 
+			opacity: 1, 
+			glow: 15, 
+			color: [ 129, 251, 252 ], 
+			percent: 0, 
+			percent_loaded: 0,
+			load_speed: 2,
+			complete: function() {
+				self.state = "play_out";
+			}
+		});
+		
 	}
 
 	/*
@@ -78,89 +66,29 @@ class GhostRing extends BaseCharacter {
 	------------------------------------------ */
 	update() {
 
-		this.ctx.beginPath();
-
-		// Arc
-		this.ctx.arc(
-			this.ghost.centerX, 
-			this.ghost.centerY, 
-			this.ghost.radius, 
-			-this.ghost.start, 
-			((this.ghost.end * this.ghost.progress()) - this.ghost.start), 
-			this.ghost.counter
-		);
-
-		// Shadow
-		this.ctx.shadowOffsetX 	= 0;
-		this.ctx.shadowOffsetY 	= 0;
-		this.ctx.shadowBlur 		= 15;
-
-		// Stoke
-		this.ctx.shadowColor 		= this.ring.strokeColor();
-		this.ctx.strokeStyle 		= this.ghost.strokeColor();
-		this.ctx.lineWidth 			= this.ghost.stroke;
-		this.ctx.lineCap 				= "round";
-		this.ctx.stroke();
-
-		// Logic around WTF is happening
-		if( this.ghost.percent < this.ghost.fully_loaded ){
-			this.ghost.percent += 1.5;
-		} else if ( this.ghost.percent >= this.ghost.fully_loaded && !this.ghost.loaded ) {
-			this.ghost.loaded = true;
-			this.ghost.complete();
+		if( this.state == "pre_loading" ) {
+			this.ghost.draw();
 		}
 
-		// If Ghost has loaded and engine is running we will watch for payloads
-		// that are fired off from our model
-		if( this.ghost.loaded ) {
-			this.ctx.beginPath();
-
-			// Arc
-			this.ctx.arc(
-				this.ring.centerX, 
-				this.ring.centerY, 
-				this.ring.radius, 
-				-this.ring.start, 
-				((this.ring.end * this.ring.progress()) - this.ring.start), 
-				this.ring.counter
-			);
-
-			// Shadow
-			this.ctx.shadowOffsetX 	= 0;
-			this.ctx.shadowOffsetY 	= 0;
-			this.ctx.shadowBlur 		= this.ring.glow;
-
-			// Stoke
-			this.ctx.shadowColor 		= this.ring.strokeColor();
-			this.ctx.strokeStyle 		= this.ring.strokeColor();
-			this.ctx.lineWidth 			= this.ring.stroke;
-			this.ctx.lineCap 				= "round";
-			this.ctx.stroke();
-
-			// Smoothly load things in
-			if( this.ring.percent < this.ring.percent_loaded ) {
-				this.ring.percent += .5;
-			} else if ( this.ring.percent >= this.ring.fully_loaded && !this.ring.loaded ){
-				this.ring.loaded = true;
-			}
-
-			// Animate this thing out
-			if( this.ring.loaded ) {
-				if( this.ring.glow < this.ring.final_glow ) {
-					this.ring.glow++;
-				}
-
-				if( this.ring.glow >= (this.ring.final_glow - 10) ) {
-					if( this.ring.opacity > 0 ) {
-						this.ring.opacity -= .03;
-						this.ghost.opacity -= .03;
-					} else if( this.ring.opacity <= 0 ) {
-						this.ring.complete();
-					}
-				}
-			}
+		if( this.state == "loading" ) {
+			this.ghost.draw();
+			this.ring.draw();
 		}
 
+		if( this.state == "play_out" ){
+			this.ghost.play_out();
+			this.ring.play_out();
+		}
+
+		if( this.ring.opacity <= 0 && this.state != "complete") {
+			this.state = "complete";
+			this.trigger('ring_complete');
+		}
+
+	}
+
+	play_out() {
+		console.log('out')
 	}
 
 	/*
@@ -171,6 +99,7 @@ class GhostRing extends BaseCharacter {
 	------------------------------------------ */
 	loaded( data ){
 		this.ring.percent_loaded = (data.loaded / data.total) * 100;
+		this.state = "loading";
 	}
 
 }
