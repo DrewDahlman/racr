@@ -80,19 +80,19 @@ class GameView extends BaseView {
       i.update();
     });
 
-    // this.$el.css({
-    //   'background-position': self.background.x+"px" + " " + self.background.y+"px"
-    // });
+    this.$el.css({
+      'background-position': self.background.x+"px" + " " + self.background.y+"px"
+    });
 
-    // this.background.y += 15;
+    this.background.y += 15;
 
-    // if(this.right){
-    //   this.background.x -= 15;
-    // }
+    if(this.right){
+      this.background.x -= 15;
+    }
 
-    // if(this.left){
-    //   this.background.x += 15;
-    // }
+    if(this.left){
+      this.background.x += 15;
+    }
 
 	}
 }

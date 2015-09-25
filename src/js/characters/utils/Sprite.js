@@ -31,9 +31,9 @@ Sprite.prototype = {
       this.ctx.save();
       this.ctx.beginPath();
       this.ctx.rect(
-        x + 35, // X
+        x + 37.5, // X
         y + (this.height - 30), // Y
-        this.width - 65, // Width
+        this.width - 70, // Width
         250 // Height
       );
 
@@ -47,8 +47,8 @@ Sprite.prototype = {
       //Gradient
       let gradient = this.ctx.createLinearGradient(
         y + (this.height - 30), // X1
-        y + (this.height - 30), // Y1
-        y + (this.height - 30), // X2
+        y + (this.height - 30) + (Math.random() * 5), // Y1
+        y + (this.height - 30) + (Math.random() * 5), // X2
         y + ((this.height -30) + (230 + this.phase())) // Y2
       )
 
