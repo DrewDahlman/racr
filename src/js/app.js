@@ -91,8 +91,8 @@ class Application extends Eventful {
     this.view.init();
 
     // Listen for the load to complete
-    this.view.on('load_complete', () => this.start_game() );
-    // this.view.on('load_complete', () => this.play() );
+    // this.view.on('load_complete', () => this.start_game() );
+    this.view.on('load_complete', () => this.play() );
 
 
     // Start the engine

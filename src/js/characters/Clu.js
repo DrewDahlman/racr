@@ -19,10 +19,10 @@ class Clu extends BaseCharacter {
 		let self = this;
 		
 		this.data = {
-			height: 187,
+			height: 180,
 			width: 78,
-			x: (( self.canvas.width / 2 ) - ( 77 / 2 ) - 150),
-			y: ( self.canvas.height / 2 ) - ( 187 / 2 ) + 80
+			x: 0,
+			y: 0
 		}
 
 		this.sprite = new Sprite({
@@ -35,7 +35,8 @@ class Clu extends BaseCharacter {
 				[80,-10] // on
 			],
 			color: [ 218, 67, 47 ], // RGB
-			glow: 15
+			glow: 15,
+			enemy: true
 		})
 
 	}

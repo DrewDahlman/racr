@@ -10,7 +10,9 @@ function Sprite( data ){
   this.color      = function( o ) {
     let opacity = o;
     return "rgba("+this.raw_color[0]+", "+this.raw_color[1]+", "+this.raw_color[2]+", "+opacity+")";
-  };
+  }; 
+
+  this.enemy      = data.enemy;
 
   this.multiplier = 0;
   this.start = 0;
@@ -20,19 +22,29 @@ function Sprite( data ){
     this.start += (Math.random() * 1);
     return this.multiplier * Math.sin( this.start ) + 15;
   }
+
 }
 Sprite.prototype = {
   draw: function(position, x, y){
 
       // Position is is an index in an array for the sprite
-      let pos = this.positions[position];
+      let pos = this.positions[position],
+          rad = 180 * Math.PI / 180,
+          _x = x + (this.width / 2),
+          _y = y + (this.height / 2);
 
       // Draw a hot trail
       this.ctx.save();
+      this.ctx.translate(_x, _y);
+
+      if( this.enemy ){
+        this.ctx.rotate(rad);
+      }
+
       this.ctx.beginPath();
       this.ctx.rect(
-        x + 37.5, // X
-        y + (this.height - 30), // Y
+        37.5, // X
+        this.height - 30, // Y
         this.width - 70, // Width
         250 // Height
       );
@@ -46,10 +58,10 @@ Sprite.prototype = {
 
       //Gradient
       let gradient = this.ctx.createLinearGradient(
-        y + (this.height - 30), // X1
-        y + (this.height - 30) + (Math.random() * 5), // Y1
-        y + (this.height - 30) + (Math.random() * 5), // X2
-        y + ((this.height -30) + (230 + this.phase())) // Y2
+       (this.height - 30), // X1
+       (this.height - 30) + (Math.random() * 5), // Y1
+       (this.height - 30) + (Math.random() * 5), // X2
+       ((this.height -30) + (230 + this.phase())) // Y2
       )
 
       gradient.addColorStop(0, this.color(1));
@@ -58,22 +70,22 @@ Sprite.prototype = {
       // Fill
       this.ctx.fillStyle = gradient;
       this.ctx.fill();
-      this.ctx.restore();
 
-      this.ctx.beginPath();
       // Draw the sprite
+      this.ctx.beginPath();
       this.ctx.drawImage(
         this.img,
         pos[0],
         pos[1],
         this.width,
         this.height,
-        x, 
-        y,
+        0, 
+        0,
         this.width,
         this.height
       );
 
+      this.ctx.restore();
     },
 
     // Animate somewhere

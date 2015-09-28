@@ -21,8 +21,8 @@ class Gem extends BaseCharacter {
 		this.data = {
 			height: 187,
 			width: 78,
-			x: (( self.canvas.width / 2 ) - ( 77 / 2 ) + 150),
-			y: ( self.canvas.height / 2 ) - ( 187 / 2 ) + 80
+			x: 0,
+			y: 0
 		}
 
 		this.sprite = new Sprite({
@@ -35,7 +35,8 @@ class Gem extends BaseCharacter {
 				[80,185] // on
 			],
 			color: [ 200, 47, 218 ], // RGB
-			glow: 15
+			glow: 15,
+			enemy: true
 		})
 
 	}
