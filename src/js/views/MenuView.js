@@ -66,7 +66,7 @@ class MenuView extends BaseView {
     glow.on('end', function(){
       setTimeout( function() {
         self.trigger('play');
-      },1000);
+      },0);
     });
 
     glow.play();

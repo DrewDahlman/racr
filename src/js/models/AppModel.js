@@ -10,7 +10,7 @@ const BaseModel 	= require('./BaseModel'),
 class AppModel extends BaseModel {
 
 	constructor(data) {
-		super(data);
+		super( data );
 
 		// Manifest
 		this.manifest = data.manifest;
@@ -21,6 +21,11 @@ class AppModel extends BaseModel {
 			graphics: [],
 			characters: []	
 		}
+
+		this.keys = {};
+
+		this.alive = true;
+		this.score = 0;
 
 		// Preloader
 		// Use this to load things in

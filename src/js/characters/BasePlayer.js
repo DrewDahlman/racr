@@ -24,7 +24,14 @@ class BaseCharacter extends Eventful {
 		this.model = options.model;
 
 	}
-	
+
+	/*
+	------------------------------------------
+	| setup:void (-)
+	|
+	| Setup!
+	------------------------------------------ */
+
 	/*
 	------------------------------------------
 	| update:void (-)

@@ -45,7 +45,6 @@ class LoaderView extends BaseView {
   | Ready to start loading.
   ------------------------------------------ */
   start_loading(){
-    // Start the loader
     this.model.preload();
   }
 

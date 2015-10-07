@@ -48,6 +48,9 @@ const data = {
 			},
 			scanline_1_3: {
 				src: './images/ui/scanline-1x3-trans.png'
+			},
+			background: {
+				src: './images/ui/tile.png'
 			}
 		}]
 	},

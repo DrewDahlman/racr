@@ -39,6 +39,9 @@ class Application extends Eventful {
   	// Build out model
   	this.model = new AppModel( Data );
 
+    // Some elements
+    this.$el = $("#wrapper");
+
   	// Let's build the app
   	this.setup();
   }
@@ -51,8 +54,7 @@ class Application extends Eventful {
   ------------------------------------------ */
   setup() {
 
-    // Some elements
-    this.$el = $("#wrapper")
+    let self = this;
 
     // Our game canvas
     this.canvas = document.createElement('canvas');
@@ -66,6 +68,15 @@ class Application extends Eventful {
     if(this.debug){
       new Utils().stats(this);
     }
+
+    // Controls
+    $(window).keydown( function(event){
+      self.model.keys[event.which] = true;
+    });
+
+    $(window).keyup( function(event){
+      self.model.keys[event.which] = false;
+    });
 
     // Load it up and let'r rip!
     this.init();
@@ -91,9 +102,8 @@ class Application extends Eventful {
     this.view.init();
 
     // Listen for the load to complete
-    // this.view.on('load_complete', () => this.start_game() );
-    this.view.on('load_complete', () => this.play() );
-
+    this.view.on('load_complete', () => this.start_game() );
+    // this.view.on('load_complete', () => this.play() );
 
     // Start the engine
     this.render();
@@ -149,6 +159,8 @@ class Application extends Eventful {
   | Game time baby!
   ------------------------------------------ */
   play() {
+    let self = this;
+
     this.view = new GameView({
       canvas: this.canvas, 
       ctx: this.ctx, 
@@ -157,6 +169,17 @@ class Application extends Eventful {
     });
 
     this.view.init();
+
+    this.view.on('dead', function(){
+      self.model.alive = false;
+    });
+
+    this.view.on('kill', function(){
+      self.$el.removeClass('glow');
+      setTimeout( function() {
+        self.$el.addClass('glow');
+      },0);
+    });
   }
 
   /*
@@ -185,7 +208,9 @@ class Application extends Eventful {
       this.stats.end();
     }
 
-    requestAnimationFrame( () => this.render() );
+    if(this.model.alive){
+      requestAnimationFrame( () => this.render() );
+    }
   }
 }
 

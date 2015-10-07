@@ -7,6 +7,10 @@ function Sprite( data ){
   this.glow       = data.glow;
   this.opacity    = data.opacity || 1;
   this.raw_color  = data.color;
+  this.position   = {
+    x: 0,
+    y: 0
+  };
   this.color      = function( o ) {
     let opacity = o;
     return "rgba("+this.raw_color[0]+", "+this.raw_color[1]+", "+this.raw_color[2]+", "+opacity+")";
@@ -30,20 +34,33 @@ Sprite.prototype = {
       // Position is is an index in an array for the sprite
       let pos = this.positions[position],
           rad = 180 * Math.PI / 180,
-          _x = x + (this.width / 2),
-          _y = y + (this.height / 2);
+          turn = 0,
+          _x = x - 25,
+          _y = y - 35;
 
       // Draw a hot trail
-      this.ctx.save();
+      // this.ctx.save();
       this.ctx.translate(_x, _y);
 
-      if( this.enemy ){
-        this.ctx.rotate(rad);
+      if( x > this.position.x ){
+        turn = 5 * Math.PI / 100;
+      }
+
+      if( x < this.position.x ){
+        turn = (5 * Math.PI / 100) * (-1);
+      }
+
+      if( x == this.position.x ){
+        turn = 0 * Math.PI / 100;
+      }
+
+      if( !this.enemy ){
+        this.ctx.rotate(turn);
       }
 
       this.ctx.beginPath();
       this.ctx.rect(
-        37.5, // X
+        35.5, // X
         this.height - 30, // Y
         this.width - 70, // Width
         250 // Height
@@ -61,7 +78,7 @@ Sprite.prototype = {
        (this.height - 30), // X1
        (this.height - 30) + (Math.random() * 5), // Y1
        (this.height - 30) + (Math.random() * 5), // X2
-       ((this.height -30) + (230 + this.phase())) // Y2
+       ((this.height -30) + (150 + this.phase())) // Y2
       )
 
       gradient.addColorStop(0, this.color(1));
@@ -85,7 +102,22 @@ Sprite.prototype = {
         this.height
       );
 
-      this.ctx.restore();
+      // this.ctx.rect(
+      //   15,
+      //   25,
+      //   this.width - 30,
+      //   this.height - 50
+      // );
+
+      // this.ctx.strokeStyle = "red";
+      // this.ctx.stroke();
+
+      // this.ctx.restore();
+      
+      this.ctx.rotate((turn) * (-1));
+      this.ctx.translate(_x * (-1), _y * (-1));
+
+      this.position.x = x;
     },
 
     // Animate somewhere
