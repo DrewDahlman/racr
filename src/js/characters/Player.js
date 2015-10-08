@@ -115,8 +115,6 @@ class Player extends BaseCharacter {
       sound: this.model.assets.sounds.death
     }).play();
 
-    console.log(this.model.health)
-
     // this.data.y = this.canvas.height + 150;
     setTimeout( function(){
     	self.trigger('death');
