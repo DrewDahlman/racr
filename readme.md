@@ -39,3 +39,8 @@ Each character is responsible for its own state and what it is doing, it can be 
 	- [ ] Bombs
 	- [ ] Directions
 	- [ ] Spawning
+- [ ] Cleanup
+	- [ ] DRY THAT SHIT UP YO
+	- [ ] Clean up character inheritance
+	- [ ] Clean up sprites
+	- [ ] Clean up gameplay logic
