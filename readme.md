@@ -27,15 +27,15 @@ Each view is responsible for "characters" it brings characters into existance an
 Each character is responsible for its own state and what it is doing, it can be acted upon by its parent view.
 
 ## TODO
-- [] Mute
-- [] Instructions
-- [] New Enemies
-- [] Walls
-- [] Player enhancements
-	- [] Force Field
-	- [] Spray Fire
-	- [] Bombs
-- [] Enemy Enhancements
-	- [] Bombs
-	- [] Directions
-	- [] Spawning
+- [ ] Mute
+- [ ] Instructions
+- [ ] New Enemies
+- [ ] Walls
+- [ ] Player enhancements
+	- [ ] Force Field
+	- [ ] Spray Fire
+	- [ ] Bombs
+- [ ] Enemy Enhancements
+	- [ ] Bombs
+	- [ ] Directions
+	- [ ] Spawning
