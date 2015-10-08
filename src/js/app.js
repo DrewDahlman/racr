@@ -34,7 +34,7 @@ class Application extends Eventful {
 
     // DEBUG
     this.debug = true;
-    window.mute = true;
+    window.mute = false;
 
   	// Build out model
   	this.model = new AppModel( Data );
@@ -170,9 +170,9 @@ class Application extends Eventful {
 
     this.view.init();
 
-    this.view.on('dead', function(){
-      self.model.alive = false;
-    });
+    // this.view.on('dead', function(){
+    //   self.model.alive = false;
+    // });
 
     this.view.on('kill', function(){
       self.$el.removeClass('glow');

@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 gulp.task('serve', function() {
   gulp.src(config.root)
     .pipe(webserver({
-      // 'host': '10.1.10.31',
+      // 'host': '10.1.10.33',
       'host': 'localhost',
       'fallback': 'index.html',  // Set for single page app style
       'livereload': true,        // Reload 'er on the fly?

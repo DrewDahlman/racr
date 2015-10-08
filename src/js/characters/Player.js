@@ -4,7 +4,8 @@ Copyright (c) 2015 Drew Dahlman
 
 */
 const BaseCharacter = require('./BaseCharacter'),
-			Sprite 				= require('./utils/_Sprite');
+			Sprite 				= require('./utils/_Sprite'),
+			SoundManager 	= require('../components/SoundManager');
 
 class Player extends BaseCharacter {
 
@@ -103,6 +104,15 @@ class Player extends BaseCharacter {
 	------------------------------------------ */
 	render() {
 		this.sprite.draw(1, this.data.x, this.data.y);
+	}
+
+	dead() {
+		let death = new SoundManager({
+      sound: this.model.assets.sounds.death
+    }).play();
+
+    // this.data.y = this.canvas.height + 150;
+    
 	}
 }
 

@@ -46,11 +46,22 @@ class GameView extends BaseView {
     this.clu = new Clu( options );
     this.clu2 = new Clu( options );
     this.gem = new Gem( options );
+    this.gem2 = new Gem( options );
 
     this.background = {
       x: -111,
       y: -10
     }
+
+    // Bind some events
+    $(window).keydown( function(event){
+      switch(event.which){
+        case 32:
+          self.shoot();
+          break;
+        default: return;
+      }
+    }); 
 	}
 
   init() {
@@ -58,6 +69,7 @@ class GameView extends BaseView {
     this.characters.push(this.clu);
     this.characters.push(this.clu2);
     this.characters.push(this.gem);
+    this.characters.push(this.gem2);
   }
 
   /*
@@ -75,7 +87,13 @@ class GameView extends BaseView {
       y: this.player.data.y
     });
 
-    console.log(this.player.data.x, this.player.data.y);
+    let blaster = new SoundManager({
+      sound: this.model.assets.sounds.blast_1
+    })
+
+    blaster.player.volume = .25;
+    blaster.play();
+
     this.projectiles.push(blast);
   }
 
@@ -87,32 +105,14 @@ class GameView extends BaseView {
   ------------------------------------------ */
 	update() {
     let self = this;
-
-        // Bind some events
-    // $(window).keydown( function(event){
-    //   switch(event.which){
-    //     case 39:
-    //       self.left = false;
-    //       self.right = true;
-    //       break;
-    //     case 37:
-    //       self.right = false;
-    //       self.left = true;
-    //       break;
-    //     case 32:
-    //       self.shoot();
-    //       break;
-    //     default: return;
-    //   }
-    // }); 
     
-    _.each(this.model.keys, function(v, k, i){
+    // _.each(this.model.keys, function(v, k, i){
 
-      if(k == "32" && v){
-        self.shoot();
-      }
+    //   if(k == "32" && v){
+    //     self.shoot();
+    //   }
 
-    });
+    // });
 
     // update projectiles
     _.each(this.projectiles, function(i){
@@ -164,11 +164,25 @@ class GameView extends BaseView {
 
       // Check if player dead
       if( self.collision(self.player.hit_area.x, self.player.hit_area.y, self.player.hit_area.width, self.player.hit_area.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) ){
+        self.player.dead();
         self.trigger('dead');
-        console.log(self.player.hit_area, i.hit_area, -i.hit_area.width, -i.hit_area.height)
       }
 
     });
+
+    this.$el.css({
+      'background-position': self.background.x+"px" + " " + self.background.y+"px"
+    });
+
+    this.background.y += 25;
+
+    if(this.right){
+      this.background.x -= 25;
+    }
+
+    if(this.left){
+      this.background.x += 25;
+    }
 
 	}
 

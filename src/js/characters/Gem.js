@@ -4,7 +4,8 @@ Copyright (c) 2015 Drew Dahlman
 
 */
 const BaseCharacter = require('./BaseCharacter'),
-			Sprite 				= require('./utils/EvilSprite');
+			Sprite 				= require('./utils/EvilSprite'),
+			SoundManager 	= require('../components/SoundManager');
 
 class Gem extends BaseCharacter {
 
@@ -90,6 +91,10 @@ class Gem extends BaseCharacter {
 	}
 
 	dead() {
+		let death = new SoundManager({
+      sound: this.model.assets.sounds.death
+    }).play();
+
 		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
 		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
 		this.data.speed = (Math.random() * 15) + 10;
