@@ -78,6 +78,33 @@ class Application extends Eventful {
       self.model.keys[event.which] = false;
     });
 
+    // Audio controls
+    if( window.location.hash == "#mute" ){
+      window.mute = true;
+      $("#mute").addClass('muted');
+    }
+
+    $("#mute").on('click', function(){
+
+      if( !window.mute ){
+        window.location.hash = "mute";
+        $("#mute").addClass('muted');
+        window.mute = true;
+
+        if( self.background_sound ){
+          self.background_sound.fade_out();
+        }
+      } else {
+        window.location.hash = "";
+        $("#mute").removeClass('muted');
+        window.mute = false;
+
+        if( self.background_sound ){
+          self.background_sound.fade_in(.15);
+        }
+      }
+    });
+
     // Load it up and let'r rip!
     this.init();
   }

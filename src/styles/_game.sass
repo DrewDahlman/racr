@@ -1,4 +1,4 @@
-#wrapper
+#game-wrapper
 	position: absolute
 	width: 100%
 	height: 100%
@@ -9,6 +9,30 @@
 	right: 0
 	bottom: 0
 	margin: auto
+	color: $blue
+
+	#info
+		margin:
+			bottom: 25px
+		font:
+			size: 12px
+
+	#mute
+		position: absolute
+		right: 0px
+		top: 0px
+		font:
+			size: 12px
+		cursor: pointer
+
+	#mute.muted
+		text:
+			decoration: line-through
+
+#wrapper
+	position: relative
+	width: 100%
+	height: 100%
 	background:
 		color: #191c20
 		//image: url(../images/ui/tile.png)
