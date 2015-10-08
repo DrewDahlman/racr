@@ -27,8 +27,7 @@ Each view is responsible for "characters" it brings characters into existance an
 Each character is responsible for its own state and what it is doing, it can be acted upon by its parent view.
 
 ## TODO
-- [ ] Mute
-- [ ] Instructions
+- [x] Mute
 - [ ] New Enemies
 - [ ] Walls
 - [ ] Player enhancements
