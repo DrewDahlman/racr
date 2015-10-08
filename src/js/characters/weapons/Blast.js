@@ -11,7 +11,7 @@ class Blast extends BaseProjectile {
 			y: options.y,
 			height: 45,
 			width: 2,
-			speed: 15,
+			speed: 20,
 			radius: 0,
 			glow: 15,
 			color: [ 129, 251, 252 ],
@@ -93,7 +93,7 @@ class Blast extends BaseProjectile {
     gradient.addColorStop(0, this.color(1));
     gradient.addColorStop(1, 'rgba(25,28,32,0)');
 
-    this.ctx.fillStyle = gradient;
+    this.ctx.fillStyle = this.color(1);
     this.ctx.fill();
 	}
 }

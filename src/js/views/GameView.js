@@ -88,13 +88,15 @@ class GameView extends BaseView {
     });
 
     let blaster = new SoundManager({
-      sound: this.model.assets.sounds.blast_1
+      sound: this.model.assets.sounds.blast_3
     })
 
     blaster.player.volume = .25;
     blaster.play();
 
     this.projectiles.push(blast);
+
+    console.log(blast.data.x, blast.data.y)
   }
 
   /*
