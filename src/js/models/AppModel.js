@@ -24,8 +24,9 @@ class AppModel extends BaseModel {
 
 		this.keys = {};
 
-		this.alive = true;
-		this.score = 0;
+		this.alive 	= true;
+		this.score 	= 0;
+		this.health 	= 100;
 
 		// Preloader
 		// Use this to load things in

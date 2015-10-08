@@ -63,11 +63,14 @@ class MenuView extends BaseView {
     this.trigger('ready_play');
     this.$template.removeClass('show');
 
-    glow.on('end', function(){
-      setTimeout( function() {
-        self.trigger('play');
-      },0);
-    });
+    // glow.on('end', function(){
+    //   setTimeout( function() {
+    //     self.trigger('play');
+    //   },0);
+    // });
+    setTimeout( function() {
+      self.trigger('play');
+    },500);
 
     glow.play();
   }

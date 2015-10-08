@@ -88,15 +88,13 @@ class GameView extends BaseView {
     });
 
     let blaster = new SoundManager({
-      sound: this.model.assets.sounds.blast_3
+      sound: this.model.assets.sounds.blast_1
     })
 
     blaster.player.volume = .25;
     blaster.play();
 
     this.projectiles.push(blast);
-
-    console.log(blast.data.x, blast.data.y)
   }
 
   /*
@@ -106,23 +104,16 @@ class GameView extends BaseView {
   | Update.
   ------------------------------------------ */
 	update() {
-    let self = this;
+    let self = this,
+        projectile_gc = [];
     
-    // _.each(this.model.keys, function(v, k, i){
-
-    //   if(k == "32" && v){
-    //     self.shoot();
-    //   }
-
-    // });
-
     // update projectiles
     _.each(this.projectiles, function(i){
       i.update();
 
-      // if it's out of bounds kill it
-      if( i.data.y < 0 ){
-        self.projectiles.splice(i, 0);
+      if( i.data.y < 0){
+        let _index = self.projectiles.indexOf(i);
+        projectile_gc.push(_index);
       }
     });
 
@@ -161,17 +152,33 @@ class GameView extends BaseView {
           i.dead();
           self.trigger('kill');
           self.model.score += i.points;
+
+          // Kill it
+          let _index = self.projectiles.indexOf(i);
+          projectile_gc.push(_index);
         }
       })
 
       // Check if player dead
       if( self.collision(self.player.hit_area.x, self.player.hit_area.y, self.player.hit_area.width, self.player.hit_area.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) ){
-        self.player.dead();
-        self.trigger('dead');
+        if( self.model.health > 0 ){
+          // reset the bad guy
+          i.dead();
+
+          // Take away some health
+          self.model.health -= 10;
+          self.trigger('ouch');
+          console.log(self.model.health);
+
+        } else {
+          self.player.dead();
+          self.trigger('dead');
+        }
       }
 
     });
 
+    // Animate the BG
     this.$el.css({
       'background-position': self.background.x+"px" + " " + self.background.y+"px"
     });
@@ -186,6 +193,10 @@ class GameView extends BaseView {
       this.background.x += 25;
     }
 
+    // cleanup
+    _.each(projectile_gc, function(i){
+      self.projectiles.splice(i, 1);
+    });
 	}
 
   /*

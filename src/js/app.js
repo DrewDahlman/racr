@@ -170,14 +170,21 @@ class Application extends Eventful {
 
     this.view.init();
 
-    // this.view.on('dead', function(){
-    //   self.model.alive = false;
-    // });
+    this.view.on('dead', function(){
+      self.model.alive = false;
+    });
 
     this.view.on('kill', function(){
-      self.$el.removeClass('glow');
+      self.$el.attr('class','');
       setTimeout( function() {
         self.$el.addClass('glow');
+      },0);
+    });
+
+    this.view.on('ouch', function(){
+      self.$el.attr('class','');
+      setTimeout( function() {
+        self.$el.addClass('injury');
       },0);
     });
   }

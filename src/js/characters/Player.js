@@ -23,7 +23,7 @@ class Player extends BaseCharacter {
 			height: 187,
 			width: 77,
 			x: ( self.canvas.width / 2 ) - ( 77 / 2 ),
-			y: self.canvas.height - 250,
+			y: self.canvas.height - 300,
 			left: false,
 			right: false,
 			speed: 15
