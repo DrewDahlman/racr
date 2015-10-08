@@ -27,8 +27,10 @@ class GameView extends BaseView {
 	constructor( options ) {
     super( options );
 
+    // Define self / this
     let self = this;
     
+    // Define directions
     self.right = false;
     self.left = false;
 
@@ -36,8 +38,13 @@ class GameView extends BaseView {
     this.characters = [];
     this.projectiles = [];
 
+    // DOM Elements
+    this.$ui = $(JST['ui']());
+    this.$el.append(this.$ui);
+
     // Our Player
     this.player = new Player( options );
+    this.player.on('death', () => this.game_over() );
 
     // Add our target
     options.target = this.player;
@@ -45,12 +52,14 @@ class GameView extends BaseView {
     // Create enemies
     this.clu = new Clu( options );
     this.clu2 = new Clu( options );
+    this.clu3 = new Clu( options );
     this.gem = new Gem( options );
     this.gem2 = new Gem( options );
+    this.gem3 = new Gem( options );
 
     this.background = {
       x: -111,
-      y: -10
+      y: 0
     }
 
     // Bind some events
@@ -65,11 +74,12 @@ class GameView extends BaseView {
 	}
 
   init() {
-    // this.characters.push(this.player);
     this.characters.push(this.clu);
     this.characters.push(this.clu2);
+    // this.characters.push(this.clu3);
     this.characters.push(this.gem);
     this.characters.push(this.gem2);
+    // this.characters.push(this.gem3);
   }
 
   /*
@@ -107,6 +117,22 @@ class GameView extends BaseView {
     let self = this,
         projectile_gc = [];
     
+    // draw the floor
+    let pattern = this.ctx.createPattern(this.model.assets.graphics.background.img, "repeat");
+    this.ctx.fillStyle = pattern;
+
+    // Block 1
+    this.ctx.translate(0, this.background.y);
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height * 2);
+    this.ctx.fillRect(0, 0, this.canvas.width, -this.canvas.height * 2);
+    this.ctx.translate(0, this.background.y * (-1));
+
+    // Block 2
+    // this.ctx.translate(0, this.background.y - (this.canvas.height * 2));
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height * 2);
+    // this.ctx.translate(0, this.background.y + (this.canvas.height * 2));
+
+
     // update projectiles
     _.each(this.projectiles, function(i){
       i.update();
@@ -149,9 +175,15 @@ class GameView extends BaseView {
       // Check if character is dead
       _.each(self.projectiles, function(p){
         if( self.collision( p.data.x, p.data.y, p.data.width, p.data.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) && i.hit_area.x > 0 ){
+          
+          // reset the bad guy
           i.dead();
+
+          // trigger
           self.trigger('kill');
-          self.model.score += i.points;
+
+          // Points
+          self.model.score += i.data.points;
 
           // Kill it
           let _index = self.projectiles.indexOf(i);
@@ -161,43 +193,58 @@ class GameView extends BaseView {
 
       // Check if player dead
       if( self.collision(self.player.hit_area.x, self.player.hit_area.y, self.player.hit_area.width, self.player.hit_area.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) ){
+        
+        // Take away some health
+        self.model.health -= 10;
+        self.trigger('ouch');
+
         if( self.model.health > 0 ){
+
           // reset the bad guy
           i.dead();
 
-          // Take away some health
-          self.model.health -= 10;
-          self.trigger('ouch');
-          console.log(self.model.health);
+          // Score
+          self.model.score += (i.data.points / 2)
+
+          // Reduce health
+          $('#health-bar').css({
+            width: self.model.health + "%"
+          });
 
         } else {
           self.player.dead();
-          self.trigger('dead');
         }
       }
 
     });
 
     // Animate the BG
-    this.$el.css({
-      'background-position': self.background.x+"px" + " " + self.background.y+"px"
-    });
-
-    this.background.y += 25;
-
-    if(this.right){
-      this.background.x -= 25;
-    }
-
-    if(this.left){
-      this.background.x += 25;
+    this.background.y += 20;
+    if( this.background.y >= this.canvas.height){
+      this.background.y = 0;
     }
 
     // cleanup
     _.each(projectile_gc, function(i){
       self.projectiles.splice(i, 1);
     });
+
+    // Points
+    $("#score").text(self.model.score);
+
 	}
+
+  /*
+  ------------------------------------------
+  | game_over:void (-)
+  |
+  | WAH WAH WAH.
+  ------------------------------------------ */
+  game_over() {
+    $(this.canvas).fadeOut();
+    this.$ui.fadeOut();
+    this.trigger('dead');
+  }
 
   /*
   ------------------------------------------

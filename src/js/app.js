@@ -105,6 +105,9 @@ class Application extends Eventful {
     this.view.on('load_complete', () => this.start_game() );
     // this.view.on('load_complete', () => this.play() );
 
+    // Set the game state
+    this.model.state = "PLAY";
+
     // Start the engine
     this.render();
   }
@@ -161,6 +164,8 @@ class Application extends Eventful {
   play() {
     let self = this;
 
+    this.model.state = "PLAY";
+
     this.view = new GameView({
       canvas: this.canvas, 
       ctx: this.ctx, 
@@ -171,7 +176,7 @@ class Application extends Eventful {
     this.view.init();
 
     this.view.on('dead', function(){
-      self.model.alive = false;
+      self.model.state = "GAME_OVER";
     });
 
     this.view.on('kill', function(){
@@ -186,6 +191,25 @@ class Application extends Eventful {
       setTimeout( function() {
         self.$el.addClass('injury');
       },0);
+    });
+  }
+
+  /*
+  ------------------------------------------
+  | game_over:void (-)
+  |
+  | GAME OVER!
+  ------------------------------------------ */
+  game_over() {
+    this.view.off('dead').off('kill').off('ouch');
+    this.background_sound.fade_out();
+
+    let game_over = $(JST['game_over']({score: this.model.score}));
+    this.$el.append(game_over);
+    game_over.addClass('show');
+
+    $("#play-again").on("click", function(){
+      window.location.reload();
     });
   }
 
@@ -215,8 +239,12 @@ class Application extends Eventful {
       this.stats.end();
     }
 
-    if(this.model.alive){
+    if(this.model.state == "PLAY"){
       requestAnimationFrame( () => this.render() );
+    }
+
+    if( this.model.state == "GAME_OVER" ){
+      this.game_over();
     }
   }
 }

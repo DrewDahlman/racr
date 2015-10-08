@@ -15,18 +15,24 @@ class AppModel extends BaseModel {
 		// Manifest
 		this.manifest = data.manifest;
 
+		// Keys
+		this.keys 		= {};
+
+		// State
+		this.state 		= "";
+
+		// Score
+		this.score 		= 0;
+
+		// Health
+		this.health 	= 100;
+
 		// Setup data
 		this.assets = {
 			sounds: [],
 			graphics: [],
 			characters: []	
 		}
-
-		this.keys = {};
-
-		this.alive 	= true;
-		this.score 	= 0;
-		this.health 	= 100;
 
 		// Preloader
 		// Use this to load things in
@@ -82,6 +88,26 @@ class AppModel extends BaseModel {
 	package_loaded(data) {
 		this.trigger('asset_loaded', { message: data.message, total: data.total, loaded: data.loaded });
 		this.preload();
+	}
+
+	/*
+	------------------------------------------
+	| reset:void (-)
+	|
+	| Reset the game.
+	------------------------------------------ */
+	reset() {
+		// Keys
+		this.keys 		= {};
+
+		// State
+		this.state 		= "";
+
+		// Score
+		this.score 		= 0;
+
+		// Health
+		this.health 	= 100;
 	}
 }
 

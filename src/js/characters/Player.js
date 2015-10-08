@@ -79,13 +79,13 @@ class Player extends BaseCharacter {
 		});
 
 		if(this.data.right){
-			if( this.data.x < this.canvas.width - (this.data.width * 2) ){
+			if( this.data.x < this.canvas.width - (this.data.width) ){
 				this.data.x += this.data.speed;
 			}
 		}
 
 		if( this.data.left ){
-			if( this.data.x > 0 ){
+			if( this.data.x > this.data.width ){
 				this.data.x -= this.data.speed;
 			}
 		}
@@ -103,15 +103,24 @@ class Player extends BaseCharacter {
 	| Render!
 	------------------------------------------ */
 	render() {
-		this.sprite.draw(1, this.data.x, this.data.y);
+		if( this.model.health > 0 ){
+			this.sprite.draw(1, this.data.x, this.data.y);
+		}
 	}
 
 	dead() {
+		let self = this;
+
 		let death = new SoundManager({
       sound: this.model.assets.sounds.death
     }).play();
 
+    console.log(this.model.health)
+
     // this.data.y = this.canvas.height + 150;
+    setTimeout( function(){
+    	self.trigger('death');
+    }, 500);
     
 	}
 }
