@@ -33,8 +33,8 @@ Each character is responsible for its own state and what it is doing, it can be 
 - [ ] Gameplay
 	- [ ] Add intros
 - [ ] Data
-	- [ ] Build character data into objects to consume
-	- [ ] Integrate character data into new characters
+	- [x] Build character data into objects to consume
+	- [x] Integrate character data into new characters
 - [ ] Player enhancements
 	- [ ] Force Field
 	- [ ] Spray Fire
