@@ -54,19 +54,7 @@ const data = {
 			}
 		}]
 	},
-	characters: {
-		player: {
-			name: "",
-			height: 187,
-			width: 77,
-			x: 0,
-			y: 0,
-			positions: [
-				[8,378], // Off
-				[84, 378] // On
-			]
-		},
-		clu: {
+	characters: [{
 			name: "Clu",
 			height: 180,
 			width: 78,
@@ -88,8 +76,7 @@ const data = {
 				height: 130,
 				width: 28
 			}
-		},
-		gem: {
+		},{
 			name: "Gem",
 			height: 180,
 			width: 78,
@@ -110,9 +97,8 @@ const data = {
 				y: 0,
 				height: 130,
 				width: 28
-			}
 		}
-	}
+	}]
 }
 
 module.exports = data

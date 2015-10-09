@@ -46,14 +46,28 @@ class GameView extends BaseView {
     options.target = this.player;
 
     // Create enemies
-    this.clu = new Enemy({
-      game: options,
-      data: this.model.characters.clu
-    });
+    // At min 4
+    for( let i = 0; i < 4; i++){
 
-    this.characters.push(this.clu);
+      // Vars
+      let enemy = null,
+          ran = Math.floor(Math.random() * this.model.characters.length);
 
+      // character
+      let character = this.model.characters[ran];
+      console.log( self.model.characters.length, ran, character )
 
+      // Create the enemy
+      enemy = new Enemy({
+        game: options,
+        data: character
+      });
+
+      // Add to our loop
+      this.characters.push(enemy);
+    }
+
+    // set a default background position
     this.background = {
       x: -111,
       y: 0
@@ -83,7 +97,7 @@ class GameView extends BaseView {
     let pattern = this.ctx.createPattern(this.model.assets.graphics.background.img, "repeat");
     this.ctx.fillStyle = pattern;
 
-    // Block 1
+    // Background
     this.ctx.translate(0, this.background.y);
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height * 2);
     this.ctx.fillRect(0, 0, this.canvas.width, -this.canvas.height * 2);
@@ -195,6 +209,12 @@ class GameView extends BaseView {
   | collision:void (-)
   |
   | Check for a collision.
+  | 
+  | This takes two things, the primary obj &
+  | the second is the target.
+  |
+  | 1 = Primary
+  | 2 = Target
   ------------------------------------------ */
   collision( x1, y1, w1, h1, x2, y2, w2, h2 ) {
     w2 += x2;
