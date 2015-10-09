@@ -55,48 +55,92 @@ const data = {
 		}]
 	},
 	characters: [{
-			name: "Clu",
-			height: 180,
-			width: 78,
+		name: "Clu",
+		height: 180,
+		width: 78,
+		x: 0,
+		y: 0,
+		speed: function() {
+			return (Math.random() * 12) + 10
+		},
+		positions: [
+			[7,-10], // off
+			[80,-10] // on
+		],
+		color: [ 218, 67, 47 ], // RGB
+		glow: 15,
+		points: 15,
+		hit_area: {
 			x: 0,
 			y: 0,
-			speed: function() {
-				return (Math.random() * 12) + 10
-			},
-			positions: [
-				[7,-10], // off
-				[80,-10] // on
-			],
-			color: [ 218, 67, 47 ], // RGB
-			glow: 15,
-			points: 15,
-			hit_area: {
-				x: 0,
-				y: 0,
-				height: 130,
-				width: 28
-			}
-		},{
-			name: "Gem",
-			height: 180,
-			width: 78,
+			height: 130,
+			width: 28
+		}
+	},{
+		name: "Gem",
+		height: 180,
+		width: 78,
+		x: 0,
+		y: 0,
+		speed: function() {
+			return (Math.random() * 12) + 10
+		},
+		positions: [
+			[7,185], // off
+			[80,185] // on
+		],
+		color: [ 200, 47, 218 ], // RGB
+		glow: 15,
+		points: 15,
+		hit_area: {
 			x: 0,
 			y: 0,
-			speed: function() {
-				return (Math.random() * 12) + 10
-			},
-			positions: [
-				[7,185], // off
-				[80,185] // on
-			],
-			color: [ 200, 47, 218 ], // RGB
-			glow: 15,
-			points: 15,
-			hit_area: {
-				x: 0,
-				y: 0,
-				height: 130,
-				width: 28
+			height: 130,
+			width: 28
+		}
+	},{
+		name: "Drewcifer",
+		height: 180,
+		width: 78,
+		x: 0,
+		y: 0,
+		speed: function() {
+			return (Math.random() * 12) + 10
+		},
+		positions: [
+			[7,-10], // off
+			[80,-10] // on
+		],
+		color: [ 252, 210, 129 ], // RGB
+		glow: 15,
+		points: 15,
+		hit_area: {
+			x: 0,
+			y: 0,
+			height: 130,
+			width: 28
+		}
+	},{
+		name: "Lucifer",
+		height: 180,
+		width: 78,
+		x: 0,
+		y: 0,
+		speed: function() {
+			return (Math.random() * 12) + 10
+		},
+		positions: [
+			[7,-10], // off
+			[80,-10] // on
+		],
+		color: [ 255, 0, 0 ], // RGB
+		glow: 15,
+		points: 15,
+		hit_area: {
+			x: 0,
+			y: 0,
+			height: 130,
+			width: 28
 		}
 	}]
 }
