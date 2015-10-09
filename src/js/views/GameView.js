@@ -122,8 +122,8 @@ class GameView extends BaseView {
       // check if character is touching another kill the offender
       let others = _.without( self.characters, i);
       _.each( others, function(c){
-        if( self.collision(c.data.x, c.data.y, c.data.width, c.data.height, i.data.x, i.data.y, i.data.width, i.data.height) ){
-          i.reset();
+        if( self.collision(c.data.x, c.data.y, c.data.width, self.canvas.height, i.data.x, i.data.y, i.data.width, i.data.height) ){
+          c.reset();
         }
       });
 

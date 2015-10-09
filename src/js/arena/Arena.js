@@ -3,6 +3,10 @@
 Copyright (c) 2015 Drew Dahlman
 
 */
+
+// Things of the arena
+const Wall = require('./Wall');
+
 class Arena {
 
 	/*

@@ -99,16 +99,6 @@ Sprite.prototype = {
         this.height
       );
 
-      // this.ctx.rect(
-      //   15,
-      //   25,
-      //   this.width - 30,
-      //   this.height - 50
-      // );
-
-      // this.ctx.strokeStyle = "red";
-      // this.ctx.stroke();
-
       // this.ctx.restore();
       this.ctx.rotate((rad + turn) * (-1));
       this.ctx.translate(_x * (-1), _y * (-1));

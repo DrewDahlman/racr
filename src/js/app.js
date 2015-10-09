@@ -5,10 +5,10 @@ Copyright (c) 2015 Drew Dahlman
 */
 
 // Util, etc
-const Env 					= require('./env'),
-			Eventful 			= require('./utils/eventful'),
-    	Utils 				= require('./utils/utils'),
-    	Data 					= require('./data/data');
+const Env 				  = require('./env'),
+      Eventful 		  = require('./utils/eventful'),
+      Utils 			  = require('./utils/utils'),
+      Data 				  = require('./data/data');
 
 // Models
 const AppModel			= require('./models/AppModel');
@@ -19,7 +19,7 @@ const SoundManager  = require('./components/SoundManager');
 // Views
 const LoaderView    = require('./views/LoaderView'),
       MenuView      = require('./views/MenuView'),
-      GameView 			= require('./views/GameView');
+      GameView 		  = require('./views/GameView');
 
 class Application extends Eventful {
 
