@@ -89,14 +89,14 @@ Sprite.prototype = {
       this.ctx.beginPath();
       this.ctx.drawImage(
         this.img,
-        pos[0],
-        pos[1],
-        this.width,
-        this.height,
+        Math.round(pos[0]),
+        Math.round(pos[1]),
+        Math.round(this.width),
+        Math.round(this.height),
         0, 
         0,
-        this.width,
-        this.height
+        Math.round(this.width),
+        Math.round(this.height)
       );
 
       // this.ctx.restore();

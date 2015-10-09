@@ -183,6 +183,17 @@ class Application extends Eventful {
       self.play();
     })
 
+    $(window).keydown( function(event){
+      switch(event.which){
+        case 32:
+          if( self.view.play ){
+            self.view.play();
+          }
+          break;
+        default: return;
+      }
+    });
+
     // Kick off the view
     this.view.init();
 
@@ -260,6 +271,19 @@ class Application extends Eventful {
       // }
       window.location.reload();
     });
+
+    setTimeout( function() {
+      // Bind some events
+      $(window).keydown( function(event){
+        switch(event.which){
+          case 32:
+            window.location.reload();
+            break;
+          default: return;
+        }
+      }); 
+    },1500);
+
   }
 
   /*
