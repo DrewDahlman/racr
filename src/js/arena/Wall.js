@@ -24,7 +24,7 @@ class Wall {
 
 		this.data = {
 			x: ( Math.random() * ( options.game.canvas.width - width ) ) - 150,
-			y: ( ( Math.random() * ( options.game.canvas.height * 5 ) ) + 150 ) * (-1),
+			y: ( ( Math.random() * ( options.game.canvas.height * 7 ) ) + 150 ) * (-1),
 			width: width,
 			height: 35,
 			speed: options.data.speed
@@ -42,7 +42,7 @@ class Wall {
 		let width = (Math.random() * (this.canvas.width / 2) ) + 100;
 
 		this.data.x = ( Math.random() * ( this.canvas.width - width ) ) - 100;
-		this.data.y = ( ( Math.random() * ( this.canvas.height * 5 ) ) + 150 ) * (-1);
+		this.data.y = ( ( Math.random() * ( this.canvas.height * 7 ) ) + 150 ) * (-1);
 		this.data.width = width;
 	}
 

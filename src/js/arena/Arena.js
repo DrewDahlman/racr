@@ -104,7 +104,7 @@ class Arena {
     	// Check to ensure each wall is on it's own area
     	let other_walls = _.without( self.walls, w);
     	_.each(other_walls, function(ow){
-    		if( self.collision( w.data.x, w.data.y, w.data.width, w.data.height + 200, ow.data.x, ow.data.y, ow.data.width, ow.data.height) ){
+    		if( self.collision( w.data.x, w.data.y, w.data.width, w.data.height + 450, ow.data.x, ow.data.y, ow.data.width, ow.data.height) ){
     			w.reset();
     		}
     	});

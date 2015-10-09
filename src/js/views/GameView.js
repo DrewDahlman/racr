@@ -194,7 +194,7 @@ class GameView extends BaseView {
 
       // Check to see if enemy has hit a wall / if so KILL 
       _.each( self.arena.walls, function(w){
-        if( self.collision( i.data.x, i.data.y, i.data.width, i.data.height, w.data.x, w.data.y - self.canvas.height, w.data.width, w.data.y ) ){
+        if( self.collision( i.data.x, i.data.y, i.data.width, i.data.height, w.data.x, w.data.y - self.canvas.height, w.data.width, w.data.height + self.canvas.height ) ){
           i.reset();
         }
       });
