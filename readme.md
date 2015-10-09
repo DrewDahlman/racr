@@ -34,6 +34,7 @@ Each character is responsible for its own state and what it is doing, it can be 
 	- [ ] Force Field
 	- [ ] Spray Fire
 	- [ ] Bombs
+	- [x] Move blasters
 - [ ] Enemy Enhancements
 	- [ ] Bombs
 	- [ ] Directions
