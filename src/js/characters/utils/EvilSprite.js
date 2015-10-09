@@ -7,19 +7,18 @@ function Sprite( data ){
   this.glow       = data.glow;
   this.opacity    = data.opacity || 1;
   this.raw_color  = data.color;
+  this.multiplier = 0;
+  this.start = 0;
+
   this.position   = {
     x: 0,
     y: 0
   };
+  
   this.color      = function( o ) {
     let opacity = o;
     return "rgba("+this.raw_color[0]+", "+this.raw_color[1]+", "+this.raw_color[2]+", "+opacity+")";
   }; 
-
-  this.enemy      = data.enemy;
-
-  this.multiplier = 0;
-  this.start = 0;
 
   this.phase = function(){
     this.multiplier = 20 * Math.sin( this.start * 2);
