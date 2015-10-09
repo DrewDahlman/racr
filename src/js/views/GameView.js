@@ -12,6 +12,10 @@ const SoundManager  = require('../components/SoundManager');
 const Player        = require('../characters/Player'),
       Enemy         = require('../characters/BaseEvilPlayer');
 
+
+// Arena
+const Arena         = require('../arena/Arena');
+
 class GameView extends BaseView {
 
   /*
@@ -42,6 +46,9 @@ class GameView extends BaseView {
     this.player = new Player( options );
     this.player.on('death', () => this.game_over() );
 
+    // Arena
+    this.arena = new Arena( options );
+
     // Add our target
     options.target = this.player;
 
@@ -64,12 +71,6 @@ class GameView extends BaseView {
 
       // Add to our loop
       this.characters.push(enemy);
-    }
-
-    // set a default background position
-    this.background = {
-      x: -111,
-      y: 0
     }
 
     // Score things!
@@ -96,15 +97,8 @@ class GameView extends BaseView {
     let self = this,
         projectile_gc = [];
     
-    // draw the floor
-    let pattern = this.ctx.createPattern(this.model.assets.graphics.background.img, "repeat");
-    this.ctx.fillStyle = pattern;
-
-    // Background
-    this.ctx.translate(0, this.background.y);
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height * 2);
-    this.ctx.fillRect(0, 0, this.canvas.width, -this.canvas.height * 2);
-    this.ctx.translate(0, this.background.y * (-1));
+    // Update BG
+    this.arena.update();
 
     // update projectiles
     _.each(this.player.projectiles, function(i){
@@ -178,12 +172,6 @@ class GameView extends BaseView {
       }
 
     });
-
-    // Animate the BG
-    this.background.y += 10;
-    if( this.background.y >= this.canvas.height){
-      this.background.y = 0;
-    }
 
     // cleanup and remove old bullets
     _.each(projectile_gc, function(i){
