@@ -10,8 +10,7 @@ const SoundManager  = require('../components/SoundManager');
 
 // Characters
 const Player        = require('../characters/Player'),
-      Clu           = require('../characters/Clu'),
-      Gem           = require('../characters/Gem');
+      Enemy         = require('../characters/BaseEvilPlayer');
 
 class GameView extends BaseView {
 
@@ -47,12 +46,13 @@ class GameView extends BaseView {
     options.target = this.player;
 
     // Create enemies
-    this.clu = new Clu( options );
-    this.clu2 = new Clu( options );
-    this.clu3 = new Clu( options );
-    this.gem = new Gem( options );
-    this.gem2 = new Gem( options );
-    this.gem3 = new Gem( options );
+    this.clu = new Enemy({
+      game: options,
+      data: this.model.characters.clu
+    });
+
+    this.characters.push(this.clu);
+
 
     this.background = {
       x: -111,
@@ -60,14 +60,14 @@ class GameView extends BaseView {
     }
 	}
 
-  init() {
-    this.characters.push(this.clu);
-    this.characters.push(this.clu2);
-    // this.characters.push(this.clu3);
-    this.characters.push(this.gem);
-    this.characters.push(this.gem2);
-    // this.characters.push(this.gem3);
-  }
+  /*
+  ------------------------------------------
+  | init:void (-)
+  |
+  | Cause you gotta do stuff. Not always,
+  | but sometimes.
+  ------------------------------------------ */
+  init() {}
 
   /*
   ------------------------------------------
@@ -89,12 +89,6 @@ class GameView extends BaseView {
     this.ctx.fillRect(0, 0, this.canvas.width, -this.canvas.height * 2);
     this.ctx.translate(0, this.background.y * (-1));
 
-    // Block 2
-    // this.ctx.translate(0, this.background.y - (this.canvas.height * 2));
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height * 2);
-    // this.ctx.translate(0, this.background.y + (this.canvas.height * 2));
-
-
     // update projectiles
     _.each(this.player.projectiles, function(i){
       i.update();
@@ -108,31 +102,11 @@ class GameView extends BaseView {
     // Update the player
     this.player.update();
 
-    self.ctx.rect(
-      self.player.hit_area.x,
-      self.player.hit_area.y,
-      self.player.hit_area.width,
-      self.player.hit_area.height
-    );
-
-    // self.ctx.strokeStyle = "red";
-    // self.ctx.stroke();
-
     // Update the characters
     _.each(this.characters, function(i){
       
       // Update the character
       i.update();
-      
-      self.ctx.rect(
-        i.hit_area.x,
-        i.hit_area.y,
-        i.hit_area.width,
-        i.hit_area.height
-      );
-
-      // self.ctx.strokeStyle = "red";
-      // self.ctx.stroke();
 
       // check if character is touching another kill the offender
       let others = _.without( self.characters, i);
@@ -189,7 +163,7 @@ class GameView extends BaseView {
     });
 
     // Animate the BG
-    this.background.y += 20;
+    this.background.y += 18;
     if( this.background.y >= this.canvas.height){
       this.background.y = 0;
     }

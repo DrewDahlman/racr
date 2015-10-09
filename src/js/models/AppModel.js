@@ -13,7 +13,8 @@ class AppModel extends BaseModel {
 		super( data );
 
 		// Manifest
-		this.manifest = data.manifest;
+		this.manifest 		= data.manifest;
+		this.characters 	= data.characters;
 
 		// Keys
 		this.keys 		= {};

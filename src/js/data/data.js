@@ -65,6 +65,52 @@ const data = {
 				[8,378], // Off
 				[84, 378] // On
 			]
+		},
+		clu: {
+			name: "Clu",
+			height: 180,
+			width: 78,
+			x: 0,
+			y: 0,
+			speed: function() {
+				return (Math.random() * 12) + 10
+			},
+			positions: [
+				[7,-10], // off
+				[80,-10] // on
+			],
+			color: [ 218, 67, 47 ], // RGB
+			glow: 15,
+			points: 15,
+			hit_area: {
+				x: 0,
+				y: 0,
+				height: 130,
+				width: 28
+			}
+		},
+		gem: {
+			name: "Gem",
+			height: 180,
+			width: 78,
+			x: 0,
+			y: 0,
+			speed: function() {
+				return (Math.random() * 12) + 10
+			},
+			positions: [
+				[7,185], // off
+				[80,185] // on
+			],
+			color: [ 200, 47, 218 ], // RGB
+			glow: 15,
+			points: 15,
+			hit_area: {
+				x: 0,
+				y: 0,
+				height: 130,
+				width: 28
+			}
 		}
 	}
 }

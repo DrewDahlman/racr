@@ -147,8 +147,24 @@ class Player extends BaseCharacter {
 	| Render!
 	------------------------------------------ */
 	render() {
+		let self = this;
+		
 		if( this.model.health > 0 ){
 			this.sprite.draw(1, this.data.x, this.data.y);
+		
+			// Debug
+			if( window.debug ){
+		    self.ctx.rect(
+		      self.hit_area.x,
+		      self.hit_area.y,
+		      self.hit_area.width,
+		      self.hit_area.height
+		    );
+
+		    self.ctx.strokeStyle = "red";
+		    self.ctx.stroke();
+			}
+
 		}
 	}
 

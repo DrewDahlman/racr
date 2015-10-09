@@ -33,7 +33,7 @@ class Application extends Eventful {
   	super();
 
     // DEBUG
-    this.debug = false;
+    window.debug = false;
     window.mute = false;
 
   	// Build out model
@@ -65,7 +65,7 @@ class Application extends Eventful {
     // Append the canvas to the wrapper
     this.$el.html(this.canvas);
 
-    if(this.debug){
+    if(window.debug){
       new Utils().stats(this);
     }
 
@@ -261,7 +261,7 @@ class Application extends Eventful {
   render() {
 
     // If debug
-    if(this.debug){
+    if(window.debug){
       this.stats.begin();
     }
 
@@ -274,7 +274,7 @@ class Application extends Eventful {
     }
 
     //If debug
-    if(this.debug){
+    if(window.debug){
       this.stats.end();
     }
 
