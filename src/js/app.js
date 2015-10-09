@@ -217,6 +217,8 @@ class Application extends Eventful {
       setTimeout( function() {
         self.$el.addClass('glow');
       },0);
+
+      self.score.update(self.model.score);
     });
 
     this.view.on('ouch', function(){
@@ -224,7 +226,12 @@ class Application extends Eventful {
       setTimeout( function() {
         self.$el.addClass('injury');
       },0);
+      
+      self.score.update(self.model.score);
     });
+
+    this.score = new CountUp("score", 0, 0);
+    this.score.start();
   }
 
   /*

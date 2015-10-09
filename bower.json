@@ -18,6 +18,7 @@
     "jquery": "2.1.4",
     "modernizr": "2.8.3",
     "underscore": "1.8.3",
-    "sass-meyer-reset": null
+    "sass-meyer-reset": null,
+    "countUp.js": null
   }
 }

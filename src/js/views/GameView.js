@@ -71,6 +71,10 @@ class GameView extends BaseView {
       x: -111,
       y: 0
     }
+
+    // Score things!
+    this.score = new CountUp("score", 0, 100);
+    this.score.start();
 	}
 
   /*
@@ -187,7 +191,7 @@ class GameView extends BaseView {
     });
 
     // Points
-    $("#score").text(self.model.score);
+    // $("#score").text(self.model.score);
 
 	}
 
