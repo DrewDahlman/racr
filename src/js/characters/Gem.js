@@ -27,9 +27,7 @@ class Gem extends BaseCharacter {
 			// y: (options.canvas.height / 2) - 150,
 			target_x: ((Math.random() * options.canvas.width)),
 			target: options.target,
-			speed: (Math.random() * 15) + 10,
-			friction: .95,
-			velocity: 0,
+			speed: (Math.random() * 12) + 10,
 			points: 15
 		}
 
@@ -97,7 +95,13 @@ class Gem extends BaseCharacter {
 
 		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
 		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
-		this.data.speed = (Math.random() * 15) + 10;
+		this.data.speed = (Math.random() * 12) + 10;
+	}
+
+	reset() {
+		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
+		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
+		this.data.speed = (Math.random() * 12) + 10;
 	}
 }
 

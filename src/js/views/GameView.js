@@ -134,6 +134,14 @@ class GameView extends BaseView {
       // self.ctx.strokeStyle = "red";
       // self.ctx.stroke();
 
+      // check if character is touching another kill the offender
+      let others = _.without( self.characters, i);
+      _.each( others, function(c){
+        if( self.collision(c.data.x, c.data.y, c.data.width, c.data.height, i.data.x, i.data.y, i.data.width, i.data.height) ){
+          i.reset();
+        }
+      });
+
       // Check if character is dead
       _.each(self.player.projectiles, function(p){
         if( self.collision( p.data.x, p.data.y, p.data.width, p.data.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) && i.hit_area.x > 0 ){

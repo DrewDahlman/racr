@@ -30,15 +30,19 @@ Each character is responsible for its own state and what it is doing, it can be 
 - [x] Mute
 - [ ] New Enemies
 - [ ] Walls
+- [ ] Gameplay
+	- [ ] Add intros
 - [ ] Player enhancements
 	- [ ] Force Field
 	- [ ] Spray Fire
 	- [ ] Bombs
 	- [x] Move blasters
+	- [ ] Injury flair
 - [ ] Enemy Enhancements
 	- [ ] Bombs
 	- [ ] Directions
 	- [ ] Spawning
+	- [ ] Death flair
 - [ ] Cleanup
 	- [ ] DRY THAT SHIT UP YO
 	- [ ] Clean up character inheritance
