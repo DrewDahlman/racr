@@ -10,7 +10,7 @@ class Blast extends BaseProjectile {
 			x: options.x,
 			y: options.y,
 			height: 45,
-			width: 2,
+			width: 6,
 			speed: 20,
 			radius: 0,
 			glow: 15,

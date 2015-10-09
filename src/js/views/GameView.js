@@ -108,10 +108,31 @@ class GameView extends BaseView {
         let _index = self.player.projectiles.indexOf(i);
         projectile_gc.push(_index);
       }
+
+      // Check if hit a wall
+      _.each( self.arena.walls, function(w){
+        if( self.collision( i.data.x, i.data.y, i.data.width, i.data.height, w.data.x, w.data.y, w.data.width, w.data.height ) ){
+          let _index = self.player.projectiles.indexOf(i);
+          projectile_gc.push(_index);
+        }
+      });
+
     });
 
     // Update the player
     this.player.update();
+
+    // Check the player and walls
+    _.each( this.arena.walls, function(w){
+      if( self.collision( self.player.data.x, self.player.data.y, self.player.data.width, self.player.data.height, w.data.x, w.data.y, w.data.width, w.data.height ) && self.model.health > 0){
+        self.model.health = 0;
+        self.player.dead();
+        // Reduce health
+        $('#health-bar').css({
+          width: self.model.health + "%"
+        });
+      }
+    });
 
     // Update the characters
     _.each(this.characters, function(i){
@@ -171,15 +192,19 @@ class GameView extends BaseView {
         }
       }
 
+      // Check to see if enemy has hit a wall / if so KILL 
+      _.each( self.arena.walls, function(w){
+        if( self.collision( i.data.x, i.data.y, i.data.width, i.data.height, w.data.x, w.data.y - self.canvas.height, w.data.width, w.data.y ) ){
+          i.reset();
+        }
+      });
+
     });
 
     // cleanup and remove old bullets
     _.each(projectile_gc, function(i){
       self.player.projectiles.splice(i, 1);
     });
-
-    // Points
-    // $("#score").text(self.model.score);
 
 	}
 

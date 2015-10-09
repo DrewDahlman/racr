@@ -129,7 +129,7 @@ class Player extends BaseCharacter {
 		}
 
 		if( this.data.left ){
-			if( this.data.x > this.data.width ){
+			if( this.data.x > (this.data.width/2) ){
 				this.data.x -= this.data.speed;
 			}
 		}

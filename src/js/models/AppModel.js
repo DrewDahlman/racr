@@ -15,6 +15,7 @@ class AppModel extends Eventful {
 		// Manifest
 		this.manifest 		= data.manifest;
 		this.characters 	= data.characters;
+		this.levels 			= data.levels;
 
 		// Keys
 		this.keys 		= {};
@@ -27,6 +28,9 @@ class AppModel extends Eventful {
 
 		// Health
 		this.health 	= 100;
+		
+		// Level
+		this.level 		= "level_1";
 
 		// Setup data
 		this.assets = {

@@ -54,6 +54,13 @@ const data = {
 			}
 		}]
 	},
+	levels: {
+		level_1: {
+			walls: 5,
+			enemies: 3,
+			shields: 3
+		}
+	},
 	characters: [{
 		name: "Clu",
 		height: 180,
@@ -61,7 +68,7 @@ const data = {
 		x: 0,
 		y: 0,
 		speed: function() {
-			return (Math.random() * 12) + 10
+			return (Math.random() * 12) + 15
 		},
 		positions: [
 			[7,-10], // off
@@ -83,7 +90,7 @@ const data = {
 		x: 0,
 		y: 0,
 		speed: function() {
-			return (Math.random() * 12) + 10
+			return (Math.random() * 12) + 15
 		},
 		positions: [
 			[7,185], // off
@@ -105,7 +112,7 @@ const data = {
 		x: 0,
 		y: 0,
 		speed: function() {
-			return (Math.random() * 12) + 10
+			return (Math.random() * 12) + 15
 		},
 		positions: [
 			[7,-10], // off
