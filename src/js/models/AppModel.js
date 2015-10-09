@@ -4,14 +4,14 @@ Copyright (c) 2015 Drew Dahlman
 
 */
 
-const BaseModel 	= require('./BaseModel'),
-			Preloader 	= require('../components/Preloader');
+const 	Eventful 		= require('../utils/eventful'),
+				Preloader 	= require('../components/Preloader');
 
-class AppModel extends BaseModel {
+class AppModel extends Eventful {
 
 	constructor(data) {
-		super( data );
-
+		super();
+		
 		// Manifest
 		this.manifest 		= data.manifest;
 		this.characters 	= data.characters;

@@ -19,9 +19,10 @@ class BaseEvilPlayer extends Eventful {
 		super();
 		
 		// Default Props
-		this.canvas = options.game.canvas;
-		this.ctx = options.game.ctx;
-		this.model = options.game.model;
+		this.raw_data 	= options.data;
+		this.canvas 		= options.game.canvas;
+		this.ctx 				= options.game.ctx;
+		this.model 			= options.game.model;
 
 		// data
 		this.data = {
@@ -119,7 +120,7 @@ class BaseEvilPlayer extends Eventful {
 
 		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
 		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
-		this.data.speed = (Math.random() * 12) + 10;
+		this.data.speed = this.raw_data.speed();
 
 		return;
 	}
@@ -134,7 +135,7 @@ class BaseEvilPlayer extends Eventful {
 	reset() {
 		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
 		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
-		this.data.speed = (Math.random() * 12) + 10;
+		this.data.speed = this.raw_data.speed();
 
 		return
 	}

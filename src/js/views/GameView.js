@@ -47,7 +47,7 @@ class GameView extends BaseView {
 
     // Create enemies
     // At min 4
-    for( let i = 0; i < 4; i++){
+    for( let i = 0; i < 3; i++){
 
       // Vars
       let enemy = null,
@@ -55,7 +55,6 @@ class GameView extends BaseView {
 
       // character
       let character = this.model.characters[ran];
-      console.log( self.model.characters.length, ran, character )
 
       // Create the enemy
       enemy = new Enemy({
@@ -177,7 +176,7 @@ class GameView extends BaseView {
     });
 
     // Animate the BG
-    this.background.y += 18;
+    this.background.y += 10;
     if( this.background.y >= this.canvas.height){
       this.background.y = 0;
     }

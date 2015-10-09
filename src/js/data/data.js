@@ -127,7 +127,7 @@ const data = {
 		x: 0,
 		y: 0,
 		speed: function() {
-			return (Math.random() * 12) + 10
+			return (Math.random() * 20) + 12
 		},
 		positions: [
 			[7,-10], // off
@@ -135,7 +135,7 @@ const data = {
 		],
 		color: [ 255, 0, 0 ], // RGB
 		glow: 15,
-		points: 15,
+		points: 45,
 		hit_area: {
 			x: 0,
 			y: 0,
