@@ -13,9 +13,6 @@ const Player        = require('../characters/Player'),
       Clu           = require('../characters/Clu'),
       Gem           = require('../characters/Gem');
 
-// Weapons
-const Blast         = require('../characters/weapons/Blast');
-
 class GameView extends BaseView {
 
   /*
@@ -61,16 +58,6 @@ class GameView extends BaseView {
       x: -111,
       y: 0
     }
-
-    // Bind some events
-    $(window).keydown( function(event){
-      switch(event.which){
-        case 32:
-          self.shoot();
-          break;
-        default: return;
-      }
-    }); 
 	}
 
   init() {
@@ -80,31 +67,6 @@ class GameView extends BaseView {
     this.characters.push(this.gem);
     this.characters.push(this.gem2);
     // this.characters.push(this.gem3);
-  }
-
-  /*
-  ------------------------------------------
-  | shoot:void (-)
-  |
-  | Shoot! Great shot kid!
-  ------------------------------------------ */
-  shoot() {
-
-    let blast = new Blast({
-      canvas: this.canvas,
-      ctx: this.ctx,
-      x: this.player.data.x + 10, 
-      y: this.player.data.y
-    });
-
-    let blaster = new SoundManager({
-      sound: this.model.assets.sounds.blast_1
-    })
-
-    blaster.player.volume = .25;
-    blaster.play();
-
-    this.projectiles.push(blast);
   }
 
   /*
@@ -134,11 +96,11 @@ class GameView extends BaseView {
 
 
     // update projectiles
-    _.each(this.projectiles, function(i){
+    _.each(this.player.projectiles, function(i){
       i.update();
 
       if( i.data.y < 0){
-        let _index = self.projectiles.indexOf(i);
+        let _index = self.player.projectiles.indexOf(i);
         projectile_gc.push(_index);
       }
     });
@@ -173,7 +135,7 @@ class GameView extends BaseView {
       // self.ctx.stroke();
 
       // Check if character is dead
-      _.each(self.projectiles, function(p){
+      _.each(self.player.projectiles, function(p){
         if( self.collision( p.data.x, p.data.y, p.data.width, p.data.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) && i.hit_area.x > 0 ){
           
           // reset the bad guy
@@ -186,7 +148,7 @@ class GameView extends BaseView {
           self.model.score += i.data.points;
 
           // Kill it
-          let _index = self.projectiles.indexOf(i);
+          let _index = self.player.projectiles.indexOf(i);
           projectile_gc.push(_index);
         }
       })
@@ -224,9 +186,9 @@ class GameView extends BaseView {
       this.background.y = 0;
     }
 
-    // cleanup
+    // cleanup and remove old bullets
     _.each(projectile_gc, function(i){
-      self.projectiles.splice(i, 1);
+      self.player.projectiles.splice(i, 1);
     });
 
     // Points

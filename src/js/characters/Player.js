@@ -7,6 +7,9 @@ const BaseCharacter = require('./BaseCharacter'),
 			Sprite 				= require('./utils/_Sprite'),
 			SoundManager 	= require('../components/SoundManager');
 
+// Weapons
+const Blast         = require('./weapons/Blast'); 
+
 class Player extends BaseCharacter {
 
 	/*
@@ -19,6 +22,7 @@ class Player extends BaseCharacter {
 		super( options );
 		let self = this;
 
+		// Player Data
 		this.data = {
 			height: 187,
 			width: 77,
@@ -29,6 +33,10 @@ class Player extends BaseCharacter {
 			speed: 15
 		}
 
+		// Pew pew
+    this.projectiles = [];
+
+		// Hit area
 		this.hit_area = {
 			x: this.data.x,
 			y: this.data.y,
@@ -36,6 +44,7 @@ class Player extends BaseCharacter {
 			height: this.data.height - 50
 		}
 
+		// Player sprite
 		this.sprite = new Sprite({
 			ctx: this.ctx,
 			img: this.model.assets.graphics.vehicles.img, 
@@ -48,7 +57,42 @@ class Player extends BaseCharacter {
 			color: [ 129, 251, 252 ], // RGB
 			glow: 15
 		});
+
+    // Bind some events
+    $(window).keydown( function(event){
+      switch(event.which){
+        case 32:
+          self.shoot();
+          break;
+        default: return;
+      }
+    }); 
 	}
+
+  /*
+  ------------------------------------------
+  | shoot:void (-)
+  |
+  | Shoot! Great shot kid!
+  ------------------------------------------ */
+  shoot() {
+
+    let blast = new Blast({
+      canvas: this.canvas,
+      ctx: this.ctx,
+      x: this.data.x + 10, 
+      y: this.data.y
+    });
+
+    let blaster = new SoundManager({
+      sound: this.model.assets.sounds.blast_1
+    })
+
+    blaster.player.volume = .25;
+    blaster.play();
+
+    this.projectiles.push(blast);
+  }
 
 	/*
 	------------------------------------------
