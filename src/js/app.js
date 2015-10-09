@@ -251,6 +251,9 @@ class Application extends Eventful {
     this.$el.append(game_over);
     game_over.addClass('show');
 
+    let final = new CountUp('points', 0, this.model.score);
+    final.start();
+
     $("#play-again").on("click", function(){
       // if( !window.location.hash.match("replay")){
       //   window.location.hash += "replay";
