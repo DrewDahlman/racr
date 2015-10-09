@@ -142,6 +142,28 @@ const data = {
 			height: 130,
 			width: 28
 		}
+	},{
+		name: "KeithD",
+		height: 180,
+		width: 78,
+		x: 0,
+		y: 0,
+		speed: function() {
+			return (Math.random() * 20) + 12
+		},
+		positions: [
+			[7,185], // off
+			[80,185] // on
+		],
+		color: [ 68, 21, 21 ], // RGB
+		glow: 15,
+		points: 45,
+		hit_area: {
+			x: 0,
+			y: 0,
+			height: 130,
+			width: 28
+		}
 	}]
 }
 

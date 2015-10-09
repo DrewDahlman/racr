@@ -19,6 +19,13 @@ class Blast extends BaseProjectile {
 			start: 0
 		}
 
+		this.hit_area = {
+			x: options.x,
+			y: options.y,
+			width: 14,
+			height: 45
+		}
+
 	}
 
 	/*
@@ -34,26 +41,15 @@ class Blast extends BaseProjectile {
 
 	/*
 	------------------------------------------
-	| phase:void (-)
-	|
-	| Set phasers to stun.
-	------------------------------------------ */
-
-
-  phase() {
-    this.data.multiplier = 20 * Math.sin( this.data.start * 2);
-    this.data.start += (Math.random() * 1);
-    return this.data.multiplier * Math.sin( this.data.start ) + 15;
-  }
-
-	/*
-	------------------------------------------
 	| update:void (-)
 	|
 	| Update!
 	------------------------------------------ */
 	update() {
 		this.data.y -= this.data.speed;
+		this.hit_area.y = this.data.y;
+		this.hit_area.x = this.data.x - 5;
+
 		this.render();
 	}
 
@@ -64,6 +60,7 @@ class Blast extends BaseProjectile {
 	| Render things!
 	------------------------------------------ */
 	render() {
+		let self = this;
 
 		this.ctx.beginPath();
 
@@ -82,19 +79,22 @@ class Blast extends BaseProjectile {
 		this.ctx.shadowColor = this.color(1);
 		this.ctx.stroke();
 
-    //Gradient
-    let gradient = this.ctx.createLinearGradient(
-     (this.data.x - 35), // X1
-     (this.data.x - 35) + (Math.random() * 5), // Y1
-     (this.data.x - 35) + (Math.random() * 5), // X2
-     ((this.data.x - 35) + (this.data.height + this.phase())) // Y2
-    )
-
-    gradient.addColorStop(0, this.color(1));
-    gradient.addColorStop(1, 'rgba(25,28,32,0)');
-
+		// Fill
     this.ctx.fillStyle = this.color(1);
     this.ctx.fill();
+
+		// Debug
+		if( window.debug ){
+	    self.ctx.rect(
+	      self.hit_area.x,
+	      self.hit_area.y,
+	      self.hit_area.width,
+	      self.hit_area.height
+	    );
+
+	    self.ctx.strokeStyle = "red";
+	    self.ctx.stroke();
+		}
 	}
 }
 

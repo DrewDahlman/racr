@@ -46,6 +46,7 @@ Each character is responsible for its own state and what it is doing, it can be 
 	- [ ] Directions
 	- [x] Spawning
 	- [ ] Death flair
+	- [ ] Enhance AI
 - [ ] Cleanup
 	- [ ] DRY THAT SHIT UP YO
 	- [ ] Clean up character inheritance

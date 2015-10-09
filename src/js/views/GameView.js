@@ -131,7 +131,7 @@ class GameView extends BaseView {
 
       // Check if character is dead
       _.each(self.player.projectiles, function(p){
-        if( self.collision( p.data.x, p.data.y, p.data.width, p.data.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) && i.hit_area.x > 0 ){
+        if( self.collision( p.hit_area.x, p.hit_area.y, p.hit_area.width, p.hit_area.height, i.hit_area.x, i.hit_area.y, i.hit_area.width, i.hit_area.height ) && i.hit_area.x > 0 ){
           
           // reset the bad guy
           i.dead();
