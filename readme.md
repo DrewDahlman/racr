@@ -44,7 +44,7 @@ Each character is responsible for its own state and what it is doing, it can be 
 - [ ] Enemy Enhancements
 	- [ ] Bombs
 	- [ ] Directions
-	- [ ] Spawning
+	- [x] Spawning
 	- [ ] Death flair
 - [ ] Cleanup
 	- [ ] DRY THAT SHIT UP YO
