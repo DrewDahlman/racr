@@ -129,11 +129,14 @@ class Application extends Eventful {
     this.view.init();
 
     // Listen for the load to complete
-    if( window.location.hash.match("replay") ){
-      this.view.on('load_complete', () => this.play() );
-    } else {
-      this.view.on('load_complete', () => this.start_game() );
-    }
+    // if( window.location.hash.match("replay") ){
+    //   this.view.on('load_complete', () => this.play() );
+    // } else {
+    //   this.view.on('load_complete', () => this.start_game() );
+    // }
+    
+    this.view.on('load_complete', () => this.start_game() );
+
 
     // Set the game state
     this.model.state = "PLAY";
@@ -242,9 +245,9 @@ class Application extends Eventful {
     game_over.addClass('show');
 
     $("#play-again").on("click", function(){
-      if( !window.location.hash.match("replay")){
-        window.location.hash += "replay";
-      }
+      // if( !window.location.hash.match("replay")){
+      //   window.location.hash += "replay";
+      // }
       window.location.reload();
     });
   }
