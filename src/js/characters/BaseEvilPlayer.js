@@ -134,7 +134,7 @@ class BaseEvilPlayer extends Eventful {
 	------------------------------------------ */
 	reset() {
 		this.data.y = ((Math.random() * this.canvas.height) + 90) * (-1);
-		this.data.target_x = ((Math.random() * (this.canvas.width - 144)));
+		this.data.target_x = Math.random() * this.canvas.width;
 		this.data.speed = this.raw_data.speed();
 
 		return
